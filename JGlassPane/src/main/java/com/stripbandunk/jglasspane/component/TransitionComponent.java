@@ -243,7 +243,7 @@ public class TransitionComponent extends JComponent {
             } else if (getTransition() == Transition.FADE) {
                 // paintTransitionFade(g2);
             } else if (getTransition() == Transition.SPLIT_HORIZONTAL_IN) {
-                paintTransitionSplitHorizontalIn(g2);
+                // paintTransitionSplitHorizontalIn(g2);
             } else if (getTransition() == Transition.SPLIT_HORIZONTAL_OUT) {
                 paintTransitionSplitHorizontalOut(g2);
             } else if (getTransition() == Transition.SPLIT_VERTICAL_IN) {
@@ -263,32 +263,6 @@ public class TransitionComponent extends JComponent {
             // Menghilangkan Graphics2D
             g2.dispose();
         }
-    }
-
-    /**
-     * Melakukan penggambaran efek SPlit Horizontal In
-     * @param g2
-     */
-    protected void paintTransitionSplitHorizontalIn(Graphics2D g2) {
-        // Mendapatkan nilai pertahap
-        step = getClip().height / 100.0;
-
-        // Mendapatkan nilai tengah
-        center = getClip().y + getClip().height / 2;
-
-        // Mendapatkan nilai x, y, width, height
-        height = getClip().height - (step * this.effect);
-        width = getClip().width;
-        x = getClip().x;
-        y = center - (height / 2);
-
-        // mengubah nilai rectangle double
-        getRectangle().setRect(x, y, width, height);
-
-        // melakukan penggambaran
-        g2.setClip(getClip());
-        g2.setPaint(getPaint());
-        g2.fill(getRectangle());
     }
 
     /**
