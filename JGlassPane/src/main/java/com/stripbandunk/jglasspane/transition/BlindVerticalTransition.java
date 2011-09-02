@@ -24,6 +24,7 @@ public class BlindVerticalTransition extends AbstractTransition {
     public BlindVerticalTransition(Rectangle clip, Paint paint, int totalBlind) {
         super(clip, paint);
         this.totalBlind = totalBlind;
+        this.rectable = new java.awt.geom.Rectangle2D.Double();
     }
 
     public void paint(Graphics2D g2, int effect) {
@@ -48,7 +49,11 @@ public class BlindVerticalTransition extends AbstractTransition {
         }
     }
 
-    private int getTotalBlind() {
+    public Rectangle.Double getRectable() {
+        return rectable;
+    }
+
+    public int getTotalBlind() {
         return totalBlind;
     }
 }

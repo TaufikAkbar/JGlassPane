@@ -66,19 +66,19 @@ public class TransitionComponent extends JComponent {
      */
     public static final String PROPERTY_BLINDS_STEP = "PROPERTY_BLINDS_STEP";
 
-    private Rectangle rectangleTransition;
+    private Rectangle clip;
 
-    private Paint colorTransition;
+    private Paint paint;
 
     private Transition transition;
 
     private Animator animator;
 
-    private int effect, i, blindsStep;
+    private int effect;
 
     private AlphaComposite alphaComposite;
 
-    private double step, center, x, y, width, height, stepW, stepH, temp;
+    private double step, center, x, y, width, height, stepW, stepH;
 
     private Double rectangleDouble;
 
@@ -100,25 +100,25 @@ public class TransitionComponent extends JComponent {
      * Mendapatkan warna transisi
      * @return warna transisi
      */
-    public Paint getColorTransition() {
-        return colorTransition;
+    public Paint getPaint() {
+        return paint;
     }
 
     /**
      * mengubah warna transisi
-     * @param colorTransition warna transisi baru
+     * @param paint warna transisi baru
      */
-    public void setColorTransition(Paint colorTransition) {
+    public void setPaint(Paint paint) {
         // Mendapatkan warna yang lama
-        Paint oldColor = getColorTransition();
+        Paint oldColor = getPaint();
 
         // mengubah warna menjadi yang baru
-        this.colorTransition = colorTransition;
+        this.paint = paint;
 
         // apakah warna lama tidak sama dengan warna baru
-        if (oldColor != colorTransition) {
+        if (oldColor != paint) {
             // memberi tahu propertiChangeListener bahwa warna telah berubah
-            firePropertyChange(PROPERTY_COLOR_TRANSITION, oldColor, colorTransition);
+            firePropertyChange(PROPERTY_COLOR_TRANSITION, oldColor, paint);
         }
     }
 
@@ -126,25 +126,25 @@ public class TransitionComponent extends JComponent {
      * mendapatkan Rectangle transisi
      * @return Rectangle transisi
      */
-    public Rectangle getRectangleTransition() {
-        return rectangleTransition;
+    public Rectangle getClip() {
+        return clip;
     }
 
     /**
      * Mengubah Retangle transisi
-     * @param rectangleTransition Rectangle transisi baru
+     * @param clip Rectangle transisi baru
      */
-    public void setRectangleTransition(Rectangle rectangleTransition) {
+    public void setClip(Rectangle clip) {
         // Mendapatkan Rectangle yang lama
-        Rectangle oldValue = getRectangleTransition();
+        Rectangle oldValue = getClip();
 
         // Mengubah Rectangle menjadi yang baru
-        this.rectangleTransition = rectangleTransition;
+        this.clip = clip;
 
         // apakah rectangle lama tidak sama dengan rectangle baru
-        if (oldValue != rectangleTransition) {
+        if (oldValue != clip) {
             // Memberi tahu pada propertyChangeListener bahwa rectangle berubah
-            firePropertyChange(PROPERTY_RECTANGLE_TRANSITION, oldValue, rectangleTransition);
+            firePropertyChange(PROPERTY_RECTANGLE_TRANSITION, oldValue, clip);
         }
     }
 
@@ -171,42 +171,6 @@ public class TransitionComponent extends JComponent {
         if (oldValue != transition) {
             // Memberi tahu pada propertyChangeListener bahwa transisi berubah
             firePropertyChange(PROPERTY_TRANSITION, oldValue, transition);
-        }
-    }
-
-    /**
-     * Mendapatkan nilai banyaknya step untuk transisi Blinds
-     * @return int banyak step
-     */
-    public int getBlindsStep() {
-        if (blindsStep <= 1) {
-            blindsStep = 5;
-        }
-        return blindsStep;
-    }
-
-    /**
-     * Mengubah nilai banyaknya step untuk transisi Blinds, jika nilai baru 
-     * kurang dari atau sama dengan 1, maka nilai step akan dirubah menjadi 5
-     * @param blindsStep banyak blinds step
-     */
-    public void setBlindsStep(int blindsStep) {
-        // jika blinds step kurang dari sama dengan 1
-        if (blindsStep <= 1) {
-            // dirubah jadi 5
-            blindsStep = 5;
-        }
-
-        // mendapatkan nilai lama
-        int oldValue = getBlindsStep();
-
-        // mengubah menjadi yang baru
-        this.blindsStep = blindsStep;
-
-        // apakah blinds lama tidak sama dengan blinds baru
-        if (oldValue != blindsStep) {
-            // memberitahu propertyChangeListener bahwa blindsStep telah berubah
-            firePropertyChange(PROPERTY_BLINDS_STEP, oldValue, blindsStep);
         }
     }
 
@@ -252,7 +216,7 @@ public class TransitionComponent extends JComponent {
 
         // Mengecek apakah colorTransition bernilai null dan 
         // rectangleTransition bernilai null dan Transition bernilai null
-        if (getColorTransition() != null && getRectangleTransition() != null
+        if (getPaint() != null && getClip() != null
                 && getTransition() != null && getAnimator().isRunning()) {
             // jika tidak null maka pewarnaan afek akan dijalankan
             paintTransition(g);
@@ -271,9 +235,9 @@ public class TransitionComponent extends JComponent {
         try {
             // Mengecek jenis transisi lalu menggambarnya
             if (getTransition() == Transition.BLINDS_HORIZONTAL) {
-                paintTransitionBlindsHorizontal(g2);
+                // paintTransitionBlindsHorizontal(g2);
             } else if (getTransition() == Transition.BLINDS_VERTICAL) {
-                paintTransitionBlindsVertical(g2);
+                // paintTransitionBlindsVertical(g2);
             } else if (getTransition() == Transition.BOX_IN) {
                 paintTransitionBoxIn(g2);
             } else if (getTransition() == Transition.BOX_OUT) {
@@ -310,9 +274,9 @@ public class TransitionComponent extends JComponent {
     protected void paintTransitionFade(Graphics2D g2) {
 
         // Mengubah Clip
-        g2.setClip(getRectangleTransition());
+        g2.setClip(getClip());
         // Mengubah warna Graphics
-        g2.setPaint(getColorTransition());
+        g2.setPaint(getPaint());
 
         // Mengubah alpha composite
         alphaComposite = getAlphaComposite().derive(1F - (this.effect / 100F));
@@ -320,7 +284,7 @@ public class TransitionComponent extends JComponent {
         // Mengubah alpha composite milik Graphics
         g2.setComposite(getAlphaComposite());
         // Menggambar 
-        g2.fill(getRectangleTransition());
+        g2.fill(getClip());
     }
 
     /**
@@ -329,20 +293,20 @@ public class TransitionComponent extends JComponent {
      */
     protected void paintTransitionWipeDown(Graphics2D g2) {
         // mandapatkan nilai per tahap
-        step = getRectangleTransition().height / 100.0;
+        step = getClip().height / 100.0;
 
         // Mendapatkan nilai x, y, width, height
-        x = getRectangleTransition().x;
-        y = getRectangleTransition().y + (step * this.effect);
-        width = getRectangleTransition().width;
-        height = getRectangleTransition().height - (step * this.effect);
+        x = getClip().x;
+        y = getClip().y + (step * this.effect);
+        width = getClip().width;
+        height = getClip().height - (step * this.effect);
 
         // Mengubah Double Rectangle
         getRectangleDouble().setRect(x, y, width, height);
 
         // Melakukan penggambaran
-        g2.setClip(getRectangleTransition());
-        g2.setPaint(getColorTransition());
+        g2.setClip(getClip());
+        g2.setPaint(getPaint());
         g2.fill(getRectangleDouble());
     }
 
@@ -352,20 +316,20 @@ public class TransitionComponent extends JComponent {
      */
     protected void paintTransitionWipeRight(Graphics2D g2) {
         // Mendapatkan nilai pertahap
-        step = getRectangleTransition().width / 100.0;
+        step = getClip().width / 100.0;
 
         // mendapatkan posisi x, y, width, height
-        x = getRectangleTransition().x + (step * this.effect);
-        y = getRectangleTransition().y;
-        width = getRectangleTransition().width - (step * this.effect);
-        height = getRectangleTransition().height;
+        x = getClip().x + (step * this.effect);
+        y = getClip().y;
+        width = getClip().width - (step * this.effect);
+        height = getClip().height;
 
         // mengubah nilai double rectangle
         getRectangleDouble().setRect(x, y, width, height);
 
         // melakukan penggambaran
-        g2.setClip(getRectangleTransition());
-        g2.setPaint(getColorTransition());
+        g2.setClip(getClip());
+        g2.setPaint(getPaint());
         g2.fill(getRectangleDouble());
     }
 
@@ -375,20 +339,20 @@ public class TransitionComponent extends JComponent {
      */
     protected void paintTransitionWipeLeft(Graphics2D g2) {
         // Mendapatkan nilai pertahap
-        step = getRectangleTransition().width / 100.0;
+        step = getClip().width / 100.0;
 
         // mendapatkan nilai x, y, width, height
-        x = getRectangleTransition().x;
-        y = getRectangleTransition().y;
-        width = getRectangleTransition().width - (step * this.effect);
-        height = getRectangleTransition().height;
+        x = getClip().x;
+        y = getClip().y;
+        width = getClip().width - (step * this.effect);
+        height = getClip().height;
 
         // mengubah nilai double rectangle
         getRectangleDouble().setRect(x, y, width, height);
 
         // melakukan pengambaran
-        g2.setClip(getRectangleTransition());
-        g2.setPaint(getColorTransition());
+        g2.setClip(getClip());
+        g2.setPaint(getPaint());
         g2.fill(getRectangleDouble());
     }
 
@@ -398,20 +362,20 @@ public class TransitionComponent extends JComponent {
      */
     protected void paintTransitionWipeUp(Graphics2D g2) {
         // mendapatkan nilai pertahap
-        step = getRectangleTransition().height / 100.0;
+        step = getClip().height / 100.0;
 
         // mendapatkan nilai x, y, width, height
-        x = getRectangleTransition().x;
-        y = getRectangleTransition().y;
-        width = getRectangleTransition().width;
-        height = getRectangleTransition().height - (step * this.effect);
+        x = getClip().x;
+        y = getClip().y;
+        width = getClip().width;
+        height = getClip().height - (step * this.effect);
 
         // mengubah nilai rectangle double
         getRectangleDouble().setRect(x, y, width, height);
 
         // melakukan penggambaran
-        g2.setClip(getRectangleTransition());
-        g2.setPaint(getColorTransition());
+        g2.setClip(getClip());
+        g2.setPaint(getPaint());
         g2.fill(getRectangleDouble());
     }
 
@@ -421,23 +385,23 @@ public class TransitionComponent extends JComponent {
      */
     protected void paintTransitionSplitHorizontalIn(Graphics2D g2) {
         // Mendapatkan nilai pertahap
-        step = getRectangleTransition().height / 100.0;
+        step = getClip().height / 100.0;
 
         // Mendapatkan nilai tengah
-        center = getRectangleTransition().y + getRectangleTransition().height / 2;
+        center = getClip().y + getClip().height / 2;
 
         // Mendapatkan nilai x, y, width, height
-        height = getRectangleTransition().height - (step * this.effect);
-        width = getRectangleTransition().width;
-        x = getRectangleTransition().x;
+        height = getClip().height - (step * this.effect);
+        width = getClip().width;
+        x = getClip().x;
         y = center - (height / 2);
 
         // mengubah nilai rectangle double
         getRectangleDouble().setRect(x, y, width, height);
 
         // melakukan penggambaran
-        g2.setClip(getRectangleTransition());
-        g2.setPaint(getColorTransition());
+        g2.setClip(getClip());
+        g2.setPaint(getPaint());
         g2.fill(getRectangleDouble());
     }
 
@@ -447,29 +411,29 @@ public class TransitionComponent extends JComponent {
      */
     protected void paintTransitionSplitHorizontalOut(Graphics2D g2) {
         // Mendapatkan nilai pertahap
-        step = getRectangleTransition().height / 100.0;
+        step = getClip().height / 100.0;
 
         // Mendapatkan nilai tengah
-        center = getRectangleTransition().y + getRectangleTransition().height / 2;
+        center = getClip().y + getClip().height / 2;
 
         // mendapatkan nilai x, y, width, height
         height = step * this.effect;
-        width = getRectangleTransition().width;
-        x = getRectangleTransition().x;
+        width = getClip().width;
+        x = getClip().x;
         y = center - (height / 2);
 
         // Mengubah nilai rectangle double
         getRectangleDouble().setRect(x, y, width, height);
 
         // Mengubah nilai area
-        area = new Area(getRectangleTransition());
+        area = new Area(getClip());
         area2 = new Area(getRectangleDouble());
         area.exclusiveOr(area2);
 
         // melakukan pengambaran
         g2.setClip(area);
-        g2.setPaint(getColorTransition());
-        g2.fill(getRectangleTransition());
+        g2.setPaint(getPaint());
+        g2.fill(getClip());
     }
 
     /**
@@ -478,23 +442,23 @@ public class TransitionComponent extends JComponent {
      */
     protected void paintTransitionSplitVerticalIn(Graphics2D g2) {
         // Mendapatkan nilai pertahap
-        step = getRectangleTransition().width / 100.0;
+        step = getClip().width / 100.0;
 
         // Mendapatkan nilai tengah
-        center = getRectangleTransition().x + getRectangleTransition().width / 2;
+        center = getClip().x + getClip().width / 2;
 
         // mendapatkan nilai x, y, width, height
-        width = getRectangleTransition().width - (step * this.effect);
-        height = getRectangleTransition().height;
+        width = getClip().width - (step * this.effect);
+        height = getClip().height;
         x = center - (width / 2);
-        y = getRectangleTransition().y;
+        y = getClip().y;
 
         // mengubah nilai rectangle double
         getRectangleDouble().setRect(x, y, width, height);
 
         // melakukan penggambaran
-        g2.setClip(getRectangleTransition());
-        g2.setPaint(getColorTransition());
+        g2.setClip(getClip());
+        g2.setPaint(getPaint());
         g2.fill(getRectangleDouble());
     }
 
@@ -504,29 +468,29 @@ public class TransitionComponent extends JComponent {
      */
     protected void paintTransitionSplitVerticalOut(Graphics2D g2) {
         // Mendapatkan nilai pertahap
-        step = getRectangleTransition().width / 100.0;
+        step = getClip().width / 100.0;
 
         // Mendapatkan nilai tengah
-        center = getRectangleTransition().x + getRectangleTransition().width / 2;
+        center = getClip().x + getClip().width / 2;
 
         // mendapatkan nilai x, y, width, height
         width = step * this.effect;
-        height = getRectangleTransition().height;
+        height = getClip().height;
         x = center - (width / 2);
-        y = getRectangleTransition().y;
+        y = getClip().y;
 
         // mengubah nilai rectangle double
         getRectangleDouble().setRect(x, y, width, height);
 
         // Mengubah nilai area dan area2
-        area = new Area(getRectangleTransition());
+        area = new Area(getClip());
         area2 = new Area(getRectangleDouble());
         area.exclusiveOr(area2);
 
         // Melakukan penggambaran
         g2.setClip(area);
-        g2.setPaint(getColorTransition());
-        g2.fill(getRectangleTransition());
+        g2.setPaint(getPaint());
+        g2.fill(getClip());
     }
 
     /**
@@ -535,24 +499,24 @@ public class TransitionComponent extends JComponent {
      */
     protected void paintTransitionBoxIn(Graphics2D g2) {
         // Mengubah point tengah
-        getCenterPoint().setLocation(getRectangleTransition().width / 2, getRectangleTransition().height / 2);
+        getCenterPoint().setLocation(getClip().width / 2, getClip().height / 2);
 
         // mendapatkan nilai pertahap
-        stepW = getRectangleTransition().width / 100.0;
-        stepH = getRectangleTransition().height / 100.0;
+        stepW = getClip().width / 100.0;
+        stepH = getClip().height / 100.0;
 
         // mendapatkan nilai x, y, width, height
-        width = getRectangleTransition().width - (stepW * effect);
-        height = getRectangleTransition().height - (stepH * effect);
-        x = getCenterPoint().x - (width / 2) + getRectangleTransition().x;
-        y = getCenterPoint().y - (height / 2) + getRectangleTransition().y;
+        width = getClip().width - (stepW * effect);
+        height = getClip().height - (stepH * effect);
+        x = getCenterPoint().x - (width / 2) + getClip().x;
+        y = getCenterPoint().y - (height / 2) + getClip().y;
 
         // mengubah nilai rectangle double
         getRectangleDouble().setRect(x, y, width, height);
 
         // melakukan penggambaran
-        g2.setClip(getRectangleTransition());
-        g2.setPaint(getColorTransition());
+        g2.setClip(getClip());
+        g2.setPaint(getPaint());
         g2.fill(getRectangleDouble());
     }
 
@@ -562,85 +526,31 @@ public class TransitionComponent extends JComponent {
      */
     protected void paintTransitionBoxOut(Graphics2D g2) {
         // Mengubah point tengah
-        getCenterPoint().setLocation(getRectangleTransition().width / 2, getRectangleTransition().height / 2);
+        getCenterPoint().setLocation(getClip().width / 2, getClip().height / 2);
 
         // mendapatkan nila pertahap
-        stepW = getRectangleTransition().width / 100.0;
-        stepH = getRectangleTransition().height / 100.0;
+        stepW = getClip().width / 100.0;
+        stepH = getClip().height / 100.0;
 
         // mendapatkan nilai x, y, width, height
         width = (stepW * effect);
         height = (stepH * effect);
-        x = getCenterPoint().x - (width / 2) + getRectangleTransition().x;
-        y = getCenterPoint().y - (height / 2) + getRectangleTransition().y;
+        x = getCenterPoint().x - (width / 2) + getClip().x;
+        y = getCenterPoint().y - (height / 2) + getClip().y;
 
         // mengubah nilai rectangle double
         getRectangleDouble().setRect(x, y, width, height);
 
         // mengubah nilai area 
-        area = new Area(getRectangleTransition());
+        area = new Area(getClip());
         area2 = new Area(getRectangleDouble());
         area.exclusiveOr(area2);
 
         // melakukan penggambaran
         g2.setClip(area);
-        g2.setPaint(getColorTransition());
-        g2.fill(getRectangleTransition());
+        g2.setPaint(getPaint());
+        g2.fill(getClip());
     }
-
-    /**
-     * Melakukan Penggambaran efek Blinds Horizontal
-     * @param g2
-     */
-    protected void paintTransitionBlindsHorizontal(Graphics2D g2) {
-        // mendapatkan nilai temp
-        temp = ((getRectangleTransition().height * 1.0) / (getBlindsStep() * 1.0));
-
-        // mendapatkan nilai pertahap
-        step = temp / 100.0;
-
-        // mengubah nilai Graphics
-        g2.setClip(getRectangleTransition());
-        g2.setPaint(getColorTransition());
-
-        // mendapatkan nilai x, y, width, height lalu menggambarnya
-        x = getRectangleTransition().x;
-        height = temp - (step * effect);
-        width = getRectangleTransition().width;
-        for (i = 0; i < getBlindsStep(); i++) {
-            y = getRectangleTransition().y + (temp * i);
-            getRectangleDouble().setRect(x, y, width, height);
-            g2.fill(getRectangleDouble());
-        }
-    }
-
-    /**
-     * Melakukan penggambaran efek Blinds Vertical
-     * @param g2
-     */
-    protected void paintTransitionBlindsVertical(Graphics2D g2) {
-        // mendaptkan nilai temp
-        temp = (getRectangleTransition().width * 1.0) / (getBlindsStep() * 1.0);
-
-        // mendapatkan nilai pertahap
-        step = temp / 100.0;
-
-        // mengubah nilai Graphics
-        g2.setClip(getRectangleTransition());
-        g2.setPaint(getColorTransition());
-
-        // mendapatkan nilai x, y, width, height lalu menggambarnya
-        y = getRectangleTransition().y;
-        width = temp - (step * effect);
-        height = getRectangleTransition().height;
-        for (i = 0; i < getBlindsStep(); i++) {
-            x = getRectangleTransition().x + (temp * i);
-            getRectangleDouble().setRect(x, y, width, height);
-            g2.fill(getRectangleDouble());
-        }
-    }
-    // </editor-fold>    
-    // <editor-fold defaultstate="collapsed" desc="Temp Code">
 
     /**
      * Mendapatkan animator milik TransitionComponent

@@ -10,6 +10,7 @@ package com.stripbandunk.jglasspane.transition;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D.Double;
 
 /**
  *
@@ -24,6 +25,7 @@ public class BlindHorizontalTransition extends AbstractTransition {
     public BlindHorizontalTransition(Rectangle clip, Paint paint, int totalBlind) {
         super(clip, paint);
         this.totalBlind = totalBlind;
+        this.rectable = new java.awt.geom.Rectangle2D.Double();
     }
 
     public void paint(Graphics2D g2, int effect) {
@@ -47,7 +49,11 @@ public class BlindHorizontalTransition extends AbstractTransition {
         }
     }
 
-    private int getTotalBlind() {
+    public Rectangle.Double getRectable() {
+        return rectable;
+    }
+
+    public int getTotalBlind() {
         return totalBlind;
     }
 }
