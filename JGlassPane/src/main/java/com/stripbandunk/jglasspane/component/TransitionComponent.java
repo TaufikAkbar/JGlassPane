@@ -237,7 +237,7 @@ public class TransitionComponent extends JComponent {
             } else if (getTransition() == Transition.BLINDS_VERTICAL) {
                 // paintTransitionBlindsVertical(g2);
             } else if (getTransition() == Transition.BOX_IN) {
-                paintTransitionBoxIn(g2);
+                // paintTransitionBoxIn(g2);
             } else if (getTransition() == Transition.BOX_OUT) {
                 paintTransitionBoxOut(g2);
             } else if (getTransition() == Transition.FADE) {
@@ -377,33 +377,6 @@ public class TransitionComponent extends JComponent {
         g2.setClip(area);
         g2.setPaint(getPaint());
         g2.fill(getClip());
-    }
-
-    /**
-     * Melakukan penggambaran efek Box In
-     * @param g2
-     */
-    protected void paintTransitionBoxIn(Graphics2D g2) {
-        // Mengubah point tengah
-        getCenterPoint().setLocation(getClip().width / 2, getClip().height / 2);
-
-        // mendapatkan nilai pertahap
-        stepW = getClip().width / 100.0;
-        stepH = getClip().height / 100.0;
-
-        // mendapatkan nilai x, y, width, height
-        width = getClip().width - (stepW * effect);
-        height = getClip().height - (stepH * effect);
-        x = getCenterPoint().x - (width / 2) + getClip().x;
-        y = getCenterPoint().y - (height / 2) + getClip().y;
-
-        // mengubah nilai rectangle double
-        getRectangle().setRect(x, y, width, height);
-
-        // melakukan penggambaran
-        g2.setClip(getClip());
-        g2.setPaint(getPaint());
-        g2.fill(getRectangle());
     }
 
     /**
