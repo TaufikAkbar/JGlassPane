@@ -26,7 +26,7 @@ public class TransitionComponent extends JComponent {
 
     public static final float DEFAULT_DECELERATION = 0.4F;
 
-    public static final int DEFAULT_DURATION = 1000;
+    public static final int DEFAULT_DURATION = 500;
 
     public static final String PROPERTY_TRANSITION = "PROPERTI_TRANSITION";
 
@@ -76,12 +76,12 @@ public class TransitionComponent extends JComponent {
             return;
         }
 
+        transition.beforeStart();
+
         animator.setDuration(duration);
         animator.setAcceleration(acceleration);
         animator.setDeceleration(deceleration);
         animator.start();
-
-        transition.beforeStart();
 
         fireTransitionListenerOnStart(new TransitionEvent(this));
     }
