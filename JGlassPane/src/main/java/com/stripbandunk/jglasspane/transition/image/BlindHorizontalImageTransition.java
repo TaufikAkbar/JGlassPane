@@ -8,38 +8,19 @@
 package com.stripbandunk.jglasspane.transition.image;
 
 import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D.Double;
 import java.awt.image.BufferedImage;
 
 /**
  *
  * @author echo
  */
-public class BlindHorizontalImageTransition extends AbstractImageTransition {
+public class BlindHorizontalImageTransition extends AbstractRectangleImageTransition {
 
     private int totalBlind;
 
-    private Rectangle.Double rectangle;
-
-    public BlindHorizontalImageTransition() {
-    }
-
-    public BlindHorizontalImageTransition(Point coordinate, int totalBlind) {
-        super(coordinate);
+    public void setTotalBlind(int totalBlind) {
         this.totalBlind = totalBlind;
-    }
-
-    @Override
-    public void beforeStart() {
-        super.beforeStart();
-        rectangle = new Double();
-    }
-
-    public Double getRectangle() {
-        return rectangle;
     }
 
     public int getTotalBlind() {

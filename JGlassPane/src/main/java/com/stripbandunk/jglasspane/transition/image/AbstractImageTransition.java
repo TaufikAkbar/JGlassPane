@@ -18,13 +18,6 @@ public abstract class AbstractImageTransition implements ImageTransition {
 
     private Point coordinate;
 
-    public AbstractImageTransition() {
-    }
-
-    public AbstractImageTransition(Point coordinate) {
-        this.coordinate = coordinate;
-    }
-
     public void beforeStart() {
         if (coordinate == null) {
             throw new GlassPaneException("Coordinate is null");
