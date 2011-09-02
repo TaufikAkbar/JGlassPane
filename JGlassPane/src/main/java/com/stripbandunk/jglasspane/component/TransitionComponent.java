@@ -28,7 +28,7 @@ public class TransitionComponent extends JComponent {
 
     public static final int DEFAULT_DURATION = 500;
 
-    public static final String PROPERTY_TRANSITION = "PROPERTI_TRANSITION";
+    public static final String PROPERTY_TRANSITION = "transition";
 
     private static final long serialVersionUID = 1L;
 
@@ -59,6 +59,7 @@ public class TransitionComponent extends JComponent {
         if (animator.isRunning()) {
             animator.stop();
             transition.afterFinish();
+            fireTransitionListenerOnFinish(new TransitionEvent(this));
         }
     }
 
@@ -72,7 +73,7 @@ public class TransitionComponent extends JComponent {
     }
 
     public void start(int duration, float acceleration, float deceleration) {
-        if (animator.isRunning() || transition == null) {
+        if (transition == null || animator.isRunning()) {
             return;
         }
 
@@ -89,7 +90,7 @@ public class TransitionComponent extends JComponent {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (getTransition() != null && animator.isRunning()) {
+        if (transition != null && animator.isRunning()) {
             paintTransition(g);
         }
     }
@@ -128,10 +129,8 @@ public class TransitionComponent extends JComponent {
     }
 
     public void setEffect(int effect) {
-
         this.effect = effect;
         repaint();
-
         if (effect >= 100) {
             animator.stop();
             transition.afterFinish();
