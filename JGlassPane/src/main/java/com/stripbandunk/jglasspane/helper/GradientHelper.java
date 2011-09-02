@@ -50,7 +50,7 @@ public class GradientHelper {
      * @param type tipe gradient, misal HORIZONTAL, VERTICAL, DIAGONAL_DOWN, DIAGONAL UP
      * @return warna gradient berdasarkan parameter
      */
-    public static Paint getLinearGradient(final Color c1, final Color c2, final Dimension dimention,
+    public static Paint getLinear(final Color c1, final Color c2, final Dimension dimention,
             final int type) {
         paint = null;
         if (type == GradientHelper.VERTICAL) {
@@ -73,7 +73,7 @@ public class GradientHelper {
      * @param type tipe gradient, seperti HORIZONTAL, VERTICAL, DIAGONAL_DOWN, DIAGONAL_UP
      * @return warna gradient berdasarkan parameter
      */
-    public static Paint getLinearGradient(final Color[] colors, final Dimension rect, final int type) {
+    public static Paint getLinear(final Color[] colors, final Dimension rect, final int type) {
         paint = null;
 
         final float step = 1.0F / (colors.length - 1);

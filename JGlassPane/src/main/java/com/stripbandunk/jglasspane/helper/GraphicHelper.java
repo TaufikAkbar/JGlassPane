@@ -23,14 +23,6 @@ import javax.swing.SwingUtilities;
  */
 public final class GraphicHelper {
 
-    private static Rectangle rectangle = new Rectangle();
-
-    private static BufferedImage image;
-
-    private static BufferedImage tempImage;
-
-    private static Point point = new Point();
-
     /**
      * mendapatkan rectangle gambar dengan x dan y sesuai posisi image;
      * @param image gambar sumber
@@ -38,8 +30,10 @@ public final class GraphicHelper {
      * @return Rectangle
      */
     public static Rectangle getRectangleImage(BufferedImage image, Point locationTarget) {
+        Rectangle rectangle = new Rectangle();
+
         // mengubah nilai rectangle
-        rectangle.setLocation(point);
+        rectangle.setLocation(locationTarget);
         rectangle.setSize(image.getWidth(), image.getHeight());
 
         return rectangle;
@@ -51,7 +45,9 @@ public final class GraphicHelper {
      * @param destination target komponen
      * @return Point lokasi sumber di destination
      */
-    public static Point getLocationForComponent(Component source, Component destination) {
+    public static Point getLocation(Component source, Component destination) {
+        Point point = new Point();
+
         // mendapatkan lokasi source dari layar
         point.setLocation(source.getLocationOnScreen());
 
@@ -66,12 +62,12 @@ public final class GraphicHelper {
      * @param source komponen sumber gambar
      * @return gambar target
      */
-    public static BufferedImage getImageReflectionForComponent(Component source) {
+    public static BufferedImage getImageReflection(Component source) {
         // membuat gambar baru
-        image = new BufferedImage(source.getWidth(), source.getHeight() * 2, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage(source.getWidth(), source.getHeight() * 2, BufferedImage.TYPE_INT_ARGB);
 
         // menggambar gambar reflection
-        getImageReflectionForComponent(source, image);
+        getImageReflection(source, image);
 
         // mengembalikan gambar
         return image;
@@ -82,9 +78,9 @@ public final class GraphicHelper {
      * @param source komponen sumber gambar
      * @param destination target gambar
      */
-    public static void getImageReflectionForComponent(Component source, BufferedImage destination) {
+    public static void getImageReflection(Component source, BufferedImage destination) {
         // menggambar
-        getImageReflectionForComponent(source, destination, false);
+        getImageReflection(source, destination, false);
     }
 
     /**
@@ -94,14 +90,13 @@ public final class GraphicHelper {
      * @param withComponent jika true, maka komponen ikut digambar. 
      *      dan jika false komponen tidak ikut digambar
      */
-    public static void getImageReflectionForComponent(Component source, BufferedImage destination,
+    public static void getImageReflection(Component source, BufferedImage destination,
             boolean withComponent) {
         // Mendapatkan Graphics 2D
         Graphics2D g2 = destination.createGraphics();
-
         // mendapatkan gambar komponen
-        tempImage = new BufferedImage(source.getWidth(), source.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        getBufferedImageFromComponent(source, tempImage);
+        BufferedImage tempImage = new BufferedImage(source.getWidth(), source.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        getBufferedImage(source, tempImage);
 
         // pakah komponen harug digambar
         if (withComponent) {
@@ -129,11 +124,13 @@ public final class GraphicHelper {
      * @param destination komponen target
      * @return Rectangle
      */
-    public static Rectangle getRectangleFromComponent(Component source, Component destination) {
+    public static Rectangle getClip(Component source, Component destination) {
         // Mendapatkan lokasi komponen source pada layar
         Point temp = source.getLocationOnScreen();
         // Mengubah lokasi dari layar ke komponen destination
         SwingUtilities.convertPointFromScreen(temp, destination);
+
+        Rectangle rectangle = new Rectangle();
 
         // Mengubah lokasi dan ukuran rectangle
         rectangle.setLocation(temp);
@@ -148,7 +145,7 @@ public final class GraphicHelper {
      * @param comp komponen sumber
      * @param image gambar target
      */
-    public static void getBufferedImageFromComponent(Component comp, BufferedImage image) {
+    public static void getBufferedImage(Component comp, BufferedImage image) {
         // Mendapatkan Graphics2D dari image
         Graphics2D g2 = image.createGraphics();
 
@@ -164,12 +161,12 @@ public final class GraphicHelper {
      * @param comp komponen sumber
      * @return gambar BufferedImage
      */
-    public static BufferedImage getBufferedImageFromComponent(Component comp) {
+    public static BufferedImage getBufferedImage(Component comp) {
         // Membuat gambar BufferedImage
-        image = new BufferedImage(comp.getWidth(), comp.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage(comp.getWidth(), comp.getHeight(), BufferedImage.TYPE_INT_ARGB);
 
         // menggambar dengan memanggil metode getBufferedImageFromComponent();
-        getBufferedImageFromComponent(comp, image);
+        getBufferedImage(comp, image);
 
         // menggembalikan gambar
         return image;

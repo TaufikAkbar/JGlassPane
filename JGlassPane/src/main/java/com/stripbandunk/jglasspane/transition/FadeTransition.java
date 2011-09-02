@@ -22,6 +22,10 @@ public class FadeTransition extends AbstractTransition {
 
     public FadeTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
+    }
+
+    @Override
+    public void beforeStart() {
         alphaComposite = AlphaComposite.SrcOver;
     }
 

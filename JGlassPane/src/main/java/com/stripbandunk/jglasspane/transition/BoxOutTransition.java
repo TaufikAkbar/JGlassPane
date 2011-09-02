@@ -26,6 +26,10 @@ public class BoxOutTransition extends AbstractTransition {
 
     public BoxOutTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
+    }
+
+    @Override
+    public void beforeStart() {
         centerPoint = new Point();
         rectangle = new Double();
     }

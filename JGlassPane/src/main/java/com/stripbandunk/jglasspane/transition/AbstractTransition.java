@@ -32,4 +32,14 @@ public abstract class AbstractTransition implements Transition {
     public Rectangle getClip() {
         return this.clip;
     }
+
+    @SuppressWarnings("NoopMethodInAbstractClass")
+    public void beforeStart() {
+        // do nothing
+    }
+
+    @SuppressWarnings("NoopMethodInAbstractClass")
+    public void afterFinish() {
+        // do nothing
+    }
 }

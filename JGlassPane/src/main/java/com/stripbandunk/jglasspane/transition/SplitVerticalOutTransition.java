@@ -23,6 +23,10 @@ public class SplitVerticalOutTransition extends AbstractTransition {
 
     public SplitVerticalOutTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
+    }
+
+    @Override
+    public void beforeStart() {
         rectangle = new Double();
     }
 

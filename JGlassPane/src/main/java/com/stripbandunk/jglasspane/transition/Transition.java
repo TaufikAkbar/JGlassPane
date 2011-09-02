@@ -17,6 +17,10 @@ import java.awt.Rectangle;
  */
 public interface Transition {
 
+    public void beforeStart();
+
+    public void afterFinish();
+
     public void paint(Graphics2D g2, int effect);
 
     public Paint getPaint();

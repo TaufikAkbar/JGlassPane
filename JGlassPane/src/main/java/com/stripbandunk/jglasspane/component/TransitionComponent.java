@@ -58,6 +58,7 @@ public class TransitionComponent extends JComponent {
     public void stop() {
         if (animator.isRunning()) {
             animator.stop();
+            transition.afterFinish();
         }
     }
 
@@ -71,7 +72,7 @@ public class TransitionComponent extends JComponent {
     }
 
     public void start(int duration, float acceleration, float deceleration) {
-        if (animator.isRunning()) {
+        if (animator.isRunning() || transition == null) {
             return;
         }
 
@@ -79,6 +80,8 @@ public class TransitionComponent extends JComponent {
         animator.setAcceleration(acceleration);
         animator.setDeceleration(deceleration);
         animator.start();
+
+        transition.beforeStart();
 
         fireTransitionListenerOnStart(new TransitionEvent(this));
     }
@@ -125,10 +128,13 @@ public class TransitionComponent extends JComponent {
     }
 
     public void setEffect(int effect) {
+
         this.effect = effect;
         repaint();
+
         if (effect >= 100) {
             animator.stop();
+            transition.afterFinish();
             fireTransitionListenerOnFinish(new TransitionEvent(this));
         }
     }

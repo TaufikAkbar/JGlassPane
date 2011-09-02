@@ -25,6 +25,10 @@ public class BlindHorizontalTransition extends AbstractTransition {
     public BlindHorizontalTransition(Rectangle clip, Paint paint, int totalBlind) {
         super(clip, paint);
         this.totalBlind = totalBlind;
+    }
+
+    @Override
+    public void beforeStart() {
         this.rectable = new java.awt.geom.Rectangle2D.Double();
     }
 

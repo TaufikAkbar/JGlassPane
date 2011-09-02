@@ -22,6 +22,10 @@ public class WipeDownTransition extends AbstractTransition {
 
     public WipeDownTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
+    }
+
+    @Override
+    public void beforeStart() {
         rectangle = new Double();
     }
 

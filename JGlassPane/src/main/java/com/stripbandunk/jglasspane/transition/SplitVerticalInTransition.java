@@ -24,6 +24,11 @@ public class SplitVerticalInTransition extends AbstractTransition {
         super(clip, paint);
     }
 
+    @Override
+    public void beforeStart() {
+        rectangle = new Double();
+    }
+
     public Double getRectangle() {
         return rectangle;
     }

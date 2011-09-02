@@ -22,6 +22,10 @@ public class WipeUpTransition extends AbstractTransition {
 
     public WipeUpTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
+    }
+
+    @Override
+    public void beforeStart() {
         rectangle = new Double();
     }
 
