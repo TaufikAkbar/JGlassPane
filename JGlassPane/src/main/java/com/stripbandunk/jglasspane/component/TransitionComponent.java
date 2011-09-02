@@ -245,7 +245,7 @@ public class TransitionComponent extends JComponent {
             } else if (getTransition() == Transition.SPLIT_HORIZONTAL_IN) {
                 // paintTransitionSplitHorizontalIn(g2);
             } else if (getTransition() == Transition.SPLIT_HORIZONTAL_OUT) {
-                paintTransitionSplitHorizontalOut(g2);
+                // paintTransitionSplitHorizontalOut(g2);
             } else if (getTransition() == Transition.SPLIT_VERTICAL_IN) {
                 paintTransitionSplitVerticalIn(g2);
             } else if (getTransition() == Transition.SPLIT_VERTICAL_OUT) {
@@ -263,37 +263,6 @@ public class TransitionComponent extends JComponent {
             // Menghilangkan Graphics2D
             g2.dispose();
         }
-    }
-
-    /**
-     * Melakukan penggambaran efek SPlit Horizontal Out
-     * @param g2
-     */
-    protected void paintTransitionSplitHorizontalOut(Graphics2D g2) {
-        // Mendapatkan nilai pertahap
-        step = getClip().height / 100.0;
-
-        // Mendapatkan nilai tengah
-        center = getClip().y + getClip().height / 2;
-
-        // mendapatkan nilai x, y, width, height
-        height = step * this.effect;
-        width = getClip().width;
-        x = getClip().x;
-        y = center - (height / 2);
-
-        // Mengubah nilai rectangle double
-        getRectangle().setRect(x, y, width, height);
-
-        // Mengubah nilai area
-        area = new Area(getClip());
-        area2 = new Area(getRectangle());
-        area.exclusiveOr(area2);
-
-        // melakukan pengambaran
-        g2.setClip(area);
-        g2.setPaint(getPaint());
-        g2.fill(getClip());
     }
 
     /**
