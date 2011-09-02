@@ -20,6 +20,9 @@ public class WipeRightTransition extends AbstractTransition {
 
     private Rectangle.Double rectangle;
 
+    public WipeRightTransition() {
+    }
+
     public WipeRightTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
     }

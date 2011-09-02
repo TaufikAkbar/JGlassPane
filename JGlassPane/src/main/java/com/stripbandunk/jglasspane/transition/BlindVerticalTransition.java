@@ -21,6 +21,9 @@ public class BlindVerticalTransition extends AbstractTransition {
 
     private Rectangle.Double rectable;
 
+    public BlindVerticalTransition() {
+    }
+
     public BlindVerticalTransition(Rectangle clip, Paint paint, int totalBlind) {
         super(clip, paint);
         this.totalBlind = totalBlind;

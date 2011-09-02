@@ -20,6 +20,9 @@ public class SplitVerticalInTransition extends AbstractTransition {
 
     private Rectangle.Double rectangle;
 
+    public SplitVerticalInTransition() {
+    }
+
     public SplitVerticalInTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
     }

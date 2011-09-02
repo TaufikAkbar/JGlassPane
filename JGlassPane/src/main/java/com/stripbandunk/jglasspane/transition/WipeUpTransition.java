@@ -20,6 +20,9 @@ public class WipeUpTransition extends AbstractTransition {
 
     private Rectangle.Double rectangle;
 
+    public WipeUpTransition() {
+    }
+
     public WipeUpTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
     }

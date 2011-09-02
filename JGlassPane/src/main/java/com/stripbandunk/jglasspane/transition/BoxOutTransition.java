@@ -24,6 +24,9 @@ public class BoxOutTransition extends AbstractTransition {
 
     private Rectangle.Double rectangle;
 
+    public BoxOutTransition() {
+    }
+
     public BoxOutTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
     }

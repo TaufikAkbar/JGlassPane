@@ -7,6 +7,7 @@
  */
 package com.stripbandunk.jglasspane.transition;
 
+import com.stripbandunk.jglasspane.error.GlassPaneException;
 import java.awt.Paint;
 import java.awt.Rectangle;
 
@@ -19,6 +20,10 @@ public abstract class AbstractTransition implements Transition {
     private Rectangle clip;
 
     private Paint paint;
+
+    public AbstractTransition() {
+        this(null, null);
+    }
 
     public AbstractTransition(Rectangle clip, Paint paint) {
         this.clip = clip;
@@ -33,9 +38,21 @@ public abstract class AbstractTransition implements Transition {
         return this.clip;
     }
 
+    public void setClip(Rectangle clip) {
+        this.clip = clip;
+    }
+
+    public void setPaint(Paint paint) {
+        this.paint = paint;
+    }
+
     @SuppressWarnings("NoopMethodInAbstractClass")
     public void beforeStart() {
-        // do nothing
+        if (clip == null) {
+            throw new GlassPaneException("Clip is null");
+        } else if (paint == null) {
+            throw new GlassPaneException("Paint is null");
+        }
     }
 
     @SuppressWarnings("NoopMethodInAbstractClass")

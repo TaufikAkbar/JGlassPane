@@ -20,6 +20,9 @@ public class FadeTransition extends AbstractTransition {
 
     private AlphaComposite alphaComposite;
 
+    public FadeTransition() {
+    }
+
     public FadeTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
     }

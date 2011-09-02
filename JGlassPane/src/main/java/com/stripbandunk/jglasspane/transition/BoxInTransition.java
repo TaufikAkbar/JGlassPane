@@ -23,6 +23,9 @@ public class BoxInTransition extends AbstractTransition {
 
     private Point center;
 
+    public BoxInTransition() {
+    }
+
     public BoxInTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
     }

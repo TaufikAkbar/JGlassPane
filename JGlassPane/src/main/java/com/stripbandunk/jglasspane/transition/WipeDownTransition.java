@@ -20,6 +20,9 @@ public class WipeDownTransition extends AbstractTransition {
 
     private Double rectangle;
 
+    public WipeDownTransition() {
+    }
+
     public WipeDownTransition(Rectangle clip, Paint paint) {
         super(clip, paint);
     }
