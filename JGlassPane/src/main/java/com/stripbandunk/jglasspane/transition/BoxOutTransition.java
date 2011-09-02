@@ -20,7 +20,7 @@ import java.awt.geom.Rectangle2D.Double;
  */
 public class BoxOutTransition extends AbstractTransition {
 
-    private Point centerPoint;
+    private Point center;
 
     private Rectangle.Double rectangle;
 
@@ -33,12 +33,12 @@ public class BoxOutTransition extends AbstractTransition {
 
     @Override
     public void beforeStart() {
-        centerPoint = new Point();
+        center = new Point();
         rectangle = new Double();
     }
 
-    public Point getCenterPoint() {
-        return centerPoint;
+    public Point getCenter() {
+        return center;
     }
 
     public Double getRectangle() {
@@ -47,7 +47,7 @@ public class BoxOutTransition extends AbstractTransition {
 
     public void paint(Graphics2D g2, int effect) {
         // Mengubah point tengah
-        getCenterPoint().setLocation(getClip().width / 2, getClip().height / 2);
+        getCenter().setLocation(getClip().width / 2, getClip().height / 2);
 
         // mendapatkan nila pertahap
         double stepW = getClip().width / 100.0;
@@ -56,8 +56,8 @@ public class BoxOutTransition extends AbstractTransition {
         // mendapatkan nilai x, y, width, height
         double width = (stepW * effect);
         double height = (stepH * effect);
-        double x = getCenterPoint().x - (width / 2) + getClip().x;
-        double y = getCenterPoint().y - (height / 2) + getClip().y;
+        double x = getCenter().x - (width / 2) + getClip().x;
+        double y = getCenter().y - (height / 2) + getClip().y;
 
         // mengubah nilai rectangle double
         getRectangle().setRect(x, y, width, height);
