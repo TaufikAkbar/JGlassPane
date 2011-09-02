@@ -8,9 +8,7 @@
 package com.stripbandunk.jglasspane.transition;
 
 import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D.Double;
 
 /**
  *
@@ -21,15 +19,7 @@ public class WipeLeftTransition extends AbstractTransition {
     private Rectangle.Double rectangle;
 
     public WipeLeftTransition() {
-    }
-
-    public WipeLeftTransition(Rectangle clip, Paint paint) {
-        super(clip, paint);
-    }
-
-    @Override
-    public void beforeStart() {
-        rectangle = new Double();
+        rectangle = new Rectangle.Double();
     }
 
     public void paint(Graphics2D g2, int effect) {
@@ -43,15 +33,11 @@ public class WipeLeftTransition extends AbstractTransition {
         double height = getClip().height;
 
         // mengubah nilai double rectangle
-        getRectangle().setRect(x, y, width, height);
+        rectangle.setRect(x, y, width, height);
 
         // melakukan pengambaran
         g2.setClip(getClip());
         g2.setPaint(getPaint());
-        g2.fill(getRectangle());
-    }
-
-    public Double getRectangle() {
-        return rectangle;
+        g2.fill(rectangle);
     }
 }

@@ -8,11 +8,9 @@
 package com.stripbandunk.jglasspane.transition;
 
 import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D.Double;
 
 /**
  *
@@ -25,29 +23,13 @@ public class BoxOutTransition extends AbstractTransition {
     private Rectangle.Double rectangle;
 
     public BoxOutTransition() {
-    }
-
-    public BoxOutTransition(Rectangle clip, Paint paint) {
-        super(clip, paint);
-    }
-
-    @Override
-    public void beforeStart() {
+        rectangle = new Rectangle.Double();
         center = new Point();
-        rectangle = new Double();
-    }
-
-    public Point getCenter() {
-        return center;
-    }
-
-    public Double getRectangle() {
-        return rectangle;
     }
 
     public void paint(Graphics2D g2, int effect) {
         // Mengubah point tengah
-        getCenter().setLocation(getClip().width / 2, getClip().height / 2);
+        center.setLocation(getClip().width / 2, getClip().height / 2);
 
         // mendapatkan nila pertahap
         double stepW = getClip().width / 100.0;
@@ -56,15 +38,15 @@ public class BoxOutTransition extends AbstractTransition {
         // mendapatkan nilai x, y, width, height
         double width = (stepW * effect);
         double height = (stepH * effect);
-        double x = getCenter().x - (width / 2) + getClip().x;
-        double y = getCenter().y - (height / 2) + getClip().y;
+        double x = center.x - (width / 2) + getClip().x;
+        double y = center.y - (height / 2) + getClip().y;
 
         // mengubah nilai rectangle double
-        getRectangle().setRect(x, y, width, height);
+        rectangle.setRect(x, y, width, height);
 
         // mengubah nilai area 
         Area area = new Area(getClip());
-        Area area2 = new Area(getRectangle());
+        Area area2 = new Area(rectangle);
         area.exclusiveOr(area2);
 
         // melakukan penggambaran

@@ -8,7 +8,6 @@
 package com.stripbandunk.jglasspane.transition;
 
 import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.Rectangle;
 
 /**
@@ -19,24 +18,23 @@ public class BlindVerticalTransition extends AbstractTransition {
 
     private int totalBlind;
 
-    private Rectangle.Double rectable;
+    private Rectangle.Double rectangle;
 
     public BlindVerticalTransition() {
+        rectangle = new Rectangle.Double();
     }
 
-    public BlindVerticalTransition(Rectangle clip, Paint paint, int totalBlind) {
-        super(clip, paint);
+    public void setTotalBlind(int totalBlind) {
         this.totalBlind = totalBlind;
     }
 
-    @Override
-    public void beforeStart() {
-        this.rectable = new java.awt.geom.Rectangle2D.Double();
+    public int getTotalBlind() {
+        return totalBlind;
     }
 
     public void paint(Graphics2D g2, int effect) {
         // mendaptkan nilai temp
-        double temp = (getClip().width * 1.0) / (getTotalBlind() * 1.0);
+        double temp = (getClip().width * 1.0) / (totalBlind * 1.0);
 
         // mendapatkan nilai pertahap
         double step = temp / 100.0;
@@ -49,18 +47,10 @@ public class BlindVerticalTransition extends AbstractTransition {
         double y = getClip().y;
         double width = temp - (step * effect);
         double height = getClip().height;
-        for (int i = 0; i < getTotalBlind(); i++) {
+        for (int i = 0; i < totalBlind; i++) {
             double x = getClip().x + (temp * i);
-            rectable.setRect(x, y, width, height);
-            g2.fill(rectable);
+            rectangle.setRect(x, y, width, height);
+            g2.fill(rectangle);
         }
-    }
-
-    public Rectangle.Double getRectable() {
-        return rectable;
-    }
-
-    public int getTotalBlind() {
-        return totalBlind;
     }
 }

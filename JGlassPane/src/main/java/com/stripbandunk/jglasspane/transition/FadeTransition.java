@@ -9,8 +9,6 @@ package com.stripbandunk.jglasspane.transition;
 
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Rectangle;
 
 /**
  *
@@ -21,14 +19,6 @@ public class FadeTransition extends AbstractTransition {
     private AlphaComposite alphaComposite;
 
     public FadeTransition() {
-    }
-
-    public FadeTransition(Rectangle clip, Paint paint) {
-        super(clip, paint);
-    }
-
-    @Override
-    public void beforeStart() {
         alphaComposite = AlphaComposite.SrcOver;
     }
 
@@ -39,15 +29,11 @@ public class FadeTransition extends AbstractTransition {
         g2.setPaint(getPaint());
 
         // Mengubah alpha composite
-        alphaComposite = getAlphaComposite().derive(1F - (effect / 100F));
+        alphaComposite = alphaComposite.derive(1F - (effect / 100F));
 
         // Mengubah alpha composite milik Graphics
-        g2.setComposite(getAlphaComposite());
+        g2.setComposite(alphaComposite);
         // Menggambar 
         g2.fill(getClip());
-    }
-
-    public AlphaComposite getAlphaComposite() {
-        return alphaComposite;
     }
 }

@@ -8,10 +8,8 @@
 package com.stripbandunk.jglasspane.transition;
 
 import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.Rectangle;
 import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D.Double;
 
 /**
  *
@@ -22,19 +20,7 @@ public class SplitHorizontalOutTransition extends AbstractTransition {
     private Rectangle.Double rectangle;
 
     public SplitHorizontalOutTransition() {
-    }
-
-    public SplitHorizontalOutTransition(Rectangle clip, Paint paint) {
-        super(clip, paint);
-    }
-
-    @Override
-    public void beforeStart() {
-        rectangle = new Double();
-    }
-
-    public Double getRectangle() {
-        return rectangle;
+        rectangle = new Rectangle.Double();
     }
 
     public void paint(Graphics2D g2, int effect) {
@@ -51,11 +37,11 @@ public class SplitHorizontalOutTransition extends AbstractTransition {
         double y = center - (height / 2);
 
         // Mengubah nilai rectangle double
-        getRectangle().setRect(x, y, width, height);
+        rectangle.setRect(x, y, width, height);
 
         // Mengubah nilai area
         Area area = new Area(getClip());
-        Area area2 = new Area(getRectangle());
+        Area area2 = new Area(rectangle);
         area.exclusiveOr(area2);
 
         // melakukan pengambaran
