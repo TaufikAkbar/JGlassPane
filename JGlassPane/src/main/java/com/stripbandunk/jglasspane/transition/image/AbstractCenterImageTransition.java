@@ -24,8 +24,4 @@ abstract class AbstractCenterImageTransition extends AbstractRectangleImageTrans
     public Point getCenter() {
         return center;
     }
-
-    public void setCenter(Point center) {
-        this.center = center;
-    }
 }

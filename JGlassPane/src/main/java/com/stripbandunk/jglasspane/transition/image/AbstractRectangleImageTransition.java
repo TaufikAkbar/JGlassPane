@@ -25,8 +25,4 @@ abstract class AbstractRectangleImageTransition extends AbstractImageTransition 
     public Double getRectangle() {
         return rectangle;
     }
-
-    public void setRectangle(Double rectangle) {
-        this.rectangle = rectangle;
-    }
 }
