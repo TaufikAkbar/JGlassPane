@@ -56,7 +56,7 @@ public class Form extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Transition"));
         jPanel1.setLayout(new java.awt.GridLayout(2, 5));
 
-        buttonBoxIn.setText("Box In");
+        buttonBoxIn.setText("Box In"); // NOI18N
         buttonBoxIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBoxInActionPerformed(evt);
@@ -64,7 +64,7 @@ public class Form extends javax.swing.JFrame {
         });
         jPanel1.add(buttonBoxIn);
 
-        buttonBoxOut.setText("Box Out");
+        buttonBoxOut.setText("Box Out"); // NOI18N
         buttonBoxOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBoxOutActionPerformed(evt);
@@ -72,25 +72,25 @@ public class Form extends javax.swing.JFrame {
         });
         jPanel1.add(buttonBoxOut);
 
-        jButton3.setText("jButton3");
+        jButton3.setText("jButton3"); // NOI18N
         jPanel1.add(jButton3);
 
-        jButton4.setText("jButton4");
+        jButton4.setText("jButton4"); // NOI18N
         jPanel1.add(jButton4);
 
-        jButton5.setText("jButton5");
+        jButton5.setText("jButton5"); // NOI18N
         jPanel1.add(jButton5);
 
-        jButton7.setText("jButton7");
+        jButton7.setText("jButton7"); // NOI18N
         jPanel1.add(jButton7);
 
-        jButton6.setText("jButton6");
+        jButton6.setText("jButton6"); // NOI18N
         jPanel1.add(jButton6);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Image Transition"));
         jPanel2.setLayout(new java.awt.GridLayout(2, 5));
 
-        buttonBoxInImage.setText("Box In");
+        buttonBoxInImage.setText("Box In"); // NOI18N
         buttonBoxInImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBoxInImageActionPerformed(evt);
@@ -98,7 +98,7 @@ public class Form extends javax.swing.JFrame {
         });
         jPanel2.add(buttonBoxInImage);
 
-        buttonBoxOutImage.setText("Box Out");
+        buttonBoxOutImage.setText("Box Out"); // NOI18N
         buttonBoxOutImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBoxOutImageActionPerformed(evt);
@@ -106,19 +106,19 @@ public class Form extends javax.swing.JFrame {
         });
         jPanel2.add(buttonBoxOutImage);
 
-        jButton8.setText("jButton8");
+        jButton8.setText("jButton8"); // NOI18N
         jPanel2.add(jButton8);
 
-        jButton10.setText("jButton10");
+        jButton10.setText("jButton10"); // NOI18N
         jPanel2.add(jButton10);
 
-        jButton9.setText("jButton9");
+        jButton9.setText("jButton9"); // NOI18N
         jPanel2.add(jButton9);
 
-        jButton12.setText("jButton12");
+        jButton12.setText("jButton12"); // NOI18N
         jPanel2.add(jButton12);
 
-        jButton11.setText("jButton11");
+        jButton11.setText("jButton11"); // NOI18N
         jPanel2.add(jButton11);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -128,8 +128,8 @@ public class Form extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -139,11 +139,11 @@ public class Form extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(398, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-656)/2, (screenSize.height-512)/2, 656, 512);
+        setBounds((screenSize.width-816)/2, (screenSize.height-632)/2, 816, 632);
     }// </editor-fold>//GEN-END:initComponents
 
 private void buttonBoxInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBoxInActionPerformed
