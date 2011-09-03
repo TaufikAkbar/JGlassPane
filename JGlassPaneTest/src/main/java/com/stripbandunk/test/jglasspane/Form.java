@@ -9,6 +9,8 @@ package com.stripbandunk.test.jglasspane;
 
 import com.stripbandunk.test.jglasspane.transition.BoxInTransitionDialog;
 import com.stripbandunk.test.jglasspane.transition.BoxOutTransitionDialog;
+import com.stripbandunk.test.jglasspane.transition.image.BoxInImageTransitionDialog;
+import com.stripbandunk.test.jglasspane.transition.image.BoxOutImageTransitionDialog;
 
 /**
  *
@@ -40,6 +42,14 @@ public class Form extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        buttonBoxInImage = new javax.swing.JButton();
+        buttonBoxOutImage = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,13 +87,49 @@ public class Form extends javax.swing.JFrame {
         jButton6.setText("jButton6");
         jPanel1.add(jButton6);
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Image Transition"));
+        jPanel2.setLayout(new java.awt.GridLayout(2, 5));
+
+        buttonBoxInImage.setText("Box In");
+        buttonBoxInImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBoxInImageActionPerformed(evt);
+            }
+        });
+        jPanel2.add(buttonBoxInImage);
+
+        buttonBoxOutImage.setText("Box Out");
+        buttonBoxOutImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBoxOutImageActionPerformed(evt);
+            }
+        });
+        jPanel2.add(buttonBoxOutImage);
+
+        jButton8.setText("jButton8");
+        jPanel2.add(jButton8);
+
+        jButton10.setText("jButton10");
+        jPanel2.add(jButton10);
+
+        jButton9.setText("jButton9");
+        jPanel2.add(jButton9);
+
+        jButton12.setText("jButton12");
+        jPanel2.add(jButton12);
+
+        jButton11.setText("jButton11");
+        jPanel2.add(jButton11);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -91,7 +137,9 @@ public class Form extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(379, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(285, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -110,14 +158,34 @@ private void buttonBoxOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     dialog.setVisible(true);
 }//GEN-LAST:event_buttonBoxOutActionPerformed
 
+private void buttonBoxInImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBoxInImageActionPerformed
+    // TODO add your handling code here:
+    BoxInImageTransitionDialog dialog = new BoxInImageTransitionDialog(this, true);
+    dialog.setVisible(true);
+}//GEN-LAST:event_buttonBoxInImageActionPerformed
+
+private void buttonBoxOutImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBoxOutImageActionPerformed
+    // TODO add your handling code here:
+    BoxOutImageTransitionDialog dialog = new BoxOutImageTransitionDialog(this, true);
+    dialog.setVisible(true);
+}//GEN-LAST:event_buttonBoxOutImageActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonBoxIn;
+    private javax.swing.JButton buttonBoxInImage;
     private javax.swing.JButton buttonBoxOut;
+    private javax.swing.JButton buttonBoxOutImage;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
