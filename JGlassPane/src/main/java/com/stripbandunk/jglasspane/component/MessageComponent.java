@@ -19,9 +19,9 @@ import org.jdesktop.animation.timing.interpolation.PropertySetter;
  */
 public class MessageComponent extends TimingTargetComponent implements JGlassPaneComponent {
 
-    public static final float DEFAULT_ACCELERATION = 0.2F;
+    public static final float DEFAULT_ACCELERATION = 0.8F;
 
-    public static final float DEFAULT_DECELERATION = 0.4F;
+    public static final float DEFAULT_DECELERATION = 0.1F;
 
     public static final int DEFAULT_DURATION = 3000;
 
@@ -58,6 +58,22 @@ public class MessageComponent extends TimingTargetComponent implements JGlassPan
         label.setAlpha(this.alpha / 100.0f);
 
         repaint();
+    }
+
+    public boolean showWarning(String message) {
+        return show(message, DEFAULT_DURATION, Color.ORANGE, Color.WHITE);
+    }
+
+    public boolean showWarning(String message, int duration) {
+        return show(message, duration, DEFAULT_ACCELERATION, DEFAULT_DECELERATION, Color.ORANGE, Color.WHITE);
+    }
+
+    public boolean showError(String message) {
+        return show(message, DEFAULT_DURATION, Color.RED, Color.WHITE);
+    }
+
+    public boolean showError(String message, int duration) {
+        return show(message, duration, DEFAULT_ACCELERATION, DEFAULT_DECELERATION, Color.RED, Color.WHITE);
     }
 
     public boolean show(String message, Color background, Color foreground) {
