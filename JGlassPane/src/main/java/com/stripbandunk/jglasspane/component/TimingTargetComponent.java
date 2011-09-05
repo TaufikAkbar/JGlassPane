@@ -8,13 +8,30 @@
 package com.stripbandunk.jglasspane.component;
 
 import javax.swing.JPanel;
+import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 
 /**
  *
  * @author Eko Kurniawan Khannedy
  */
-abstract class TimingTargetComponent extends JPanel implements TimingTarget {
+public abstract class TimingTargetComponent extends JPanel implements TimingTarget {
+
+    private Animator animator;
+
+    @SuppressWarnings("LeakingThisInConstructor")
+    TimingTargetComponent() {
+        animator = new Animator(0);
+        animator.addTarget(this);
+    }
+
+    protected Animator getAnimator() {
+        return animator;
+    }
+
+    protected abstract void onAnimatorBegin();
+
+    protected abstract void onAnimatorEnd();
 
     @Override
     @SuppressWarnings("NoopMethodInAbstractClass")
@@ -22,13 +39,13 @@ abstract class TimingTargetComponent extends JPanel implements TimingTarget {
     }
 
     @Override
-    @SuppressWarnings("NoopMethodInAbstractClass")
     public void begin() {
+        onAnimatorBegin();
     }
 
     @Override
-    @SuppressWarnings("NoopMethodInAbstractClass")
     public void end() {
+        onAnimatorEnd();
     }
 
     @Override
