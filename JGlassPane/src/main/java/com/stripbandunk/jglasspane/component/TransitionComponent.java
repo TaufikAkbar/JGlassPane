@@ -12,15 +12,13 @@ import com.stripbandunk.jglasspane.event.TransitionListener;
 import com.stripbandunk.jglasspane.transition.Transition;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing.JComponent;
-import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 /**
  * 
  * @author Eko Kurniawan Khannedy
  */
-public class TransitionComponent extends JComponent implements JGlassPaneComponent {
+public class TransitionComponent extends TimingTargetComponent implements JGlassPaneComponent {
 
     public static final float DEFAULT_ACCELERATION = 0.2F;
 
@@ -32,15 +30,13 @@ public class TransitionComponent extends JComponent implements JGlassPaneCompone
 
     private static final long serialVersionUID = 1L;
 
-    private Animator animator;
-
     private int effect;
 
     private Transition transition;
 
     public TransitionComponent() {
         setOpaque(false);
-        animator = new Animator(0, new PropertySetter(this, "effect", 0, 101));
+        getAnimator().addTarget(new PropertySetter(this, "effect", 0, 100));
     }
 
     public Transition getTransition() {
@@ -56,9 +52,8 @@ public class TransitionComponent extends JComponent implements JGlassPaneCompone
     }
 
     public void stop() {
-        if (animator.isRunning()) {
-            animator.stop();
-            transition.afterFinish();
+        if (getAnimator().isRunning()) {
+            getAnimator().stop();
             fireTransitionListenerOnFinish(new TransitionEvent(this));
         }
     }
@@ -73,18 +68,14 @@ public class TransitionComponent extends JComponent implements JGlassPaneCompone
     }
 
     public boolean start(int duration, float acceleration, float deceleration) {
-        if (transition == null || animator.isRunning()) {
+        if (transition == null || getAnimator().isRunning()) {
             return false;
         }
 
-        transition.beforeStart();
-
-        animator.setDuration(duration);
-        animator.setAcceleration(acceleration);
-        animator.setDeceleration(deceleration);
-        animator.start();
-
-        fireTransitionListenerOnStart(new TransitionEvent(this));
+        getAnimator().setDuration(duration);
+        getAnimator().setAcceleration(acceleration);
+        getAnimator().setDeceleration(deceleration);
+        getAnimator().start();
 
         return true;
     }
@@ -92,7 +83,7 @@ public class TransitionComponent extends JComponent implements JGlassPaneCompone
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (transition != null && animator.isRunning()) {
+        if (transition != null && getAnimator().isRunning()) {
             paintTransition(g);
         }
     }
@@ -133,10 +124,17 @@ public class TransitionComponent extends JComponent implements JGlassPaneCompone
     public void setEffect(int effect) {
         this.effect = effect;
         repaint();
-        if (effect >= 100) {
-            animator.stop();
-            transition.afterFinish();
-            fireTransitionListenerOnFinish(new TransitionEvent(this));
-        }
+    }
+
+    @Override
+    protected void onAnimatorBegin() {
+        transition.beforeStart();
+        fireTransitionListenerOnStart(new TransitionEvent(this));
+    }
+
+    @Override
+    protected void onAnimatorEnd() {
+        transition.afterFinish();
+        fireTransitionListenerOnFinish(new TransitionEvent(this));
     }
 }
