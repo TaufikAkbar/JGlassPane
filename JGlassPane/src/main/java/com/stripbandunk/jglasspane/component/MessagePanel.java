@@ -25,9 +25,9 @@ class MessagePanel extends JPanel implements Serializable {
 
     private float alpha = 1.0f;
 
-    public MessagePanel() {
+    MessagePanel() {
         setOpaque(false);
-        setLayout(new FlowLayout(FlowLayout.CENTER, 25, 25));
+        setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
     }
 
     public float getAlpha() {
