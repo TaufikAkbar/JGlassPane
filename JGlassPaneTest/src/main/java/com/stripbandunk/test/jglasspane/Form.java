@@ -7,6 +7,7 @@
  */
 package com.stripbandunk.test.jglasspane;
 
+import com.stripbandunk.test.jglasspane.message.MessageDialog;
 import com.stripbandunk.test.jglasspane.transition.BlindHorizontalTransitionDialog;
 import com.stripbandunk.test.jglasspane.transition.BlindVerticalTransitionDialog;
 import com.stripbandunk.test.jglasspane.transition.BoxInTransitionDialog;
@@ -59,6 +60,7 @@ public class Form extends javax.swing.JFrame {
         jButton14 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,13 +171,25 @@ public class Form extends javax.swing.JFrame {
         });
         jPanel1.add(jButton15);
 
+        jButton8.setText("jButton8");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jButton8)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -183,7 +197,9 @@ public class Form extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(472, Short.MAX_VALUE))
+                .addGap(111, 111, 111)
+                .addComponent(jButton8)
+                .addContainerGap(334, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -268,6 +284,12 @@ private void buttonBoxOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton15ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        MessageDialog dialog = new MessageDialog(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonBoxIn;
     private javax.swing.JButton buttonBoxOut;
@@ -282,6 +304,7 @@ private void buttonBoxOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
