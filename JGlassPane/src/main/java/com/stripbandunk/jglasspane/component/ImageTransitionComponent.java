@@ -14,15 +14,13 @@ import com.stripbandunk.jglasspane.transition.image.creator.ImageCreator;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import javax.swing.JComponent;
-import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 /**
  * 
  * @author Eko Kurniawan Khannedy
  */
-public class ImageTransitionComponent extends JComponent implements JGlassPaneComponent {
+public class ImageTransitionComponent extends TimingTargetComponent implements JGlassPaneComponent {
 
     public static final float DEFAULT_ACCELERATION = 0.2F;
 
@@ -36,8 +34,6 @@ public class ImageTransitionComponent extends JComponent implements JGlassPaneCo
 
     public static final String PROPERTY_TRANSITION = "transition";
 
-    private Animator animator;
-
     private ImageTransition transition;
 
     private ImageCreator imageCreator;
@@ -48,14 +44,12 @@ public class ImageTransitionComponent extends JComponent implements JGlassPaneCo
 
     public ImageTransitionComponent() {
         setOpaque(false);
-        animator = new Animator(0, new PropertySetter(this, "effect", 0, 101));
+        getAnimator().addTarget(new PropertySetter(this, "effect", 0, 100));
     }
 
     public void stop() {
-        if (animator.isRunning()) {
-            animator.stop();
-            transition.afterFinish();
-            fireTransitionListenerOnFinish(new TransitionEvent(this));
+        if (getAnimator().isRunning()) {
+            getAnimator().stop();
         }
     }
 
@@ -68,19 +62,14 @@ public class ImageTransitionComponent extends JComponent implements JGlassPaneCo
     }
 
     public boolean start(int duration, float acceleration, float deceleration) {
-        if (imageCreator == null || transition == null || animator.isRunning()) {
+        if (imageCreator == null || transition == null || getAnimator().isRunning()) {
             return false;
         }
 
-        image = imageCreator.create();
-        transition.beforeStart();
-
-        animator.setDuration(duration);
-        animator.setAcceleration(acceleration);
-        animator.setDeceleration(deceleration);
-        animator.start();
-
-        fireTransitionListenerOnStart(new TransitionEvent(this));
+        getAnimator().setDuration(duration);
+        getAnimator().setAcceleration(acceleration);
+        getAnimator().setDeceleration(deceleration);
+        getAnimator().start();
 
         return true;
     }
@@ -88,7 +77,7 @@ public class ImageTransitionComponent extends JComponent implements JGlassPaneCo
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (imageCreator != null && transition != null && animator.isRunning()) {
+        if (imageCreator != null && transition != null && getAnimator().isRunning()) {
             paintTransition(g);
         }
     }
@@ -109,11 +98,6 @@ public class ImageTransitionComponent extends JComponent implements JGlassPaneCo
     public void setEffect(int effect) {
         this.effect = effect;
         repaint();
-        if (effect >= 100) {
-            animator.stop();
-            transition.afterFinish();
-            fireTransitionListenerOnFinish(new TransitionEvent(this));
-        }
     }
 
     public void addTransitionListener(TransitionListener listener) {
@@ -154,5 +138,20 @@ public class ImageTransitionComponent extends JComponent implements JGlassPaneCo
         ImageCreator oldImageCreator = this.imageCreator;
         this.imageCreator = imageCreator;
         firePropertyChange(PROPERTY_IMAGECREATOR, oldImageCreator, imageCreator);
+    }
+
+    @Override
+    protected void onAnimatorBegin() {
+        image = imageCreator.create();
+        transition.beforeStart();
+        fireTransitionListenerOnStart(new TransitionEvent(this));
+    }
+
+    @Override
+    protected void onAnimatorEnd() {
+        transition.afterFinish();
+        fireTransitionListenerOnFinish(new TransitionEvent(this));
+        // clear image
+        image = null;
     }
 }
