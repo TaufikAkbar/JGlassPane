@@ -20,7 +20,7 @@ import org.jdesktop.animation.timing.interpolation.PropertySetter;
  * 
  * @author Eko Kurniawan Khannedy
  */
-public class TransitionComponent extends JComponent {
+public class TransitionComponent extends JComponent implements JGlassPaneComponent {
 
     public static final float DEFAULT_ACCELERATION = 0.2F;
 
