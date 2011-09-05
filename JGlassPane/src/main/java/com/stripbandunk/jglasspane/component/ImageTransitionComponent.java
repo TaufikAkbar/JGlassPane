@@ -59,17 +59,17 @@ public class ImageTransitionComponent extends JComponent implements JGlassPaneCo
         }
     }
 
-    public void start() {
-        start(DEFAULT_DURATION);
+    public boolean start() {
+        return start(DEFAULT_DURATION);
     }
 
-    public void start(int duration) {
-        start(duration, DEFAULT_ACCELERATION, DEFAULT_DECELERATION);
+    public boolean start(int duration) {
+        return start(duration, DEFAULT_ACCELERATION, DEFAULT_DECELERATION);
     }
 
-    public void start(int duration, float acceleration, float deceleration) {
+    public boolean start(int duration, float acceleration, float deceleration) {
         if (imageCreator == null || transition == null || animator.isRunning()) {
-            return;
+            return false;
         }
 
         image = imageCreator.create();
@@ -81,6 +81,8 @@ public class ImageTransitionComponent extends JComponent implements JGlassPaneCo
         animator.start();
 
         fireTransitionListenerOnStart(new TransitionEvent(this));
+
+        return true;
     }
 
     @Override

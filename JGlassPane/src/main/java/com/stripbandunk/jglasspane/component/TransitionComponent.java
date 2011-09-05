@@ -63,18 +63,18 @@ public class TransitionComponent extends JComponent implements JGlassPaneCompone
         }
     }
 
-    public void start() {
-        start(TransitionComponent.DEFAULT_DURATION);
+    public boolean start() {
+        return start(TransitionComponent.DEFAULT_DURATION);
     }
 
-    public void start(int duration) {
-        start(duration, TransitionComponent.DEFAULT_ACCELERATION,
+    public boolean start(int duration) {
+        return start(duration, TransitionComponent.DEFAULT_ACCELERATION,
                 TransitionComponent.DEFAULT_DECELERATION);
     }
 
-    public void start(int duration, float acceleration, float deceleration) {
+    public boolean start(int duration, float acceleration, float deceleration) {
         if (transition == null || animator.isRunning()) {
-            return;
+            return false;
         }
 
         transition.beforeStart();
@@ -85,6 +85,8 @@ public class TransitionComponent extends JComponent implements JGlassPaneCompone
         animator.start();
 
         fireTransitionListenerOnStart(new TransitionEvent(this));
+
+        return true;
     }
 
     @Override
