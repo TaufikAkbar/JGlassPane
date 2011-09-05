@@ -11,7 +11,6 @@ import com.stripbandunk.jglasspane.event.MessageEvent;
 import com.stripbandunk.jglasspane.event.MessageListener;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 /**
@@ -28,8 +27,6 @@ public class MessageComponent extends TimingTargetComponent implements JGlassPan
 
     private static final long serialVersionUID = 1L;
 
-    private Animator animator;
-
     private int alpha;
 
     private MessagePanel panel;
@@ -45,8 +42,7 @@ public class MessageComponent extends TimingTargetComponent implements JGlassPan
         label = new MessageLabel();
         panel.add(label);
 
-        animator = PropertySetter.<Integer>createAnimator(DEFAULT_DURATION, this, "alpha", 100, 0);
-        animator.addTarget(this);
+        getAnimator().addTarget(new PropertySetter(this, "alpha", 100, 0));
 
         setLayout(new FlowLayout(FlowLayout.CENTER));
     }
@@ -81,7 +77,7 @@ public class MessageComponent extends TimingTargetComponent implements JGlassPan
     }
 
     public boolean show(String message, int duration, float acceleration, float deceleration, Color background, Color foreground) {
-        if (animator.isRunning()) {
+        if (getAnimator().isRunning()) {
             return false;
         }
 
@@ -89,16 +85,16 @@ public class MessageComponent extends TimingTargetComponent implements JGlassPan
         label.setForeground(foreground);
         label.setText(message);
 
-        animator.setAcceleration(acceleration);
-        animator.setDeceleration(deceleration);
-        animator.setDuration(duration);
-        animator.start();
+        getAnimator().setAcceleration(acceleration);
+        getAnimator().setDeceleration(deceleration);
+        getAnimator().setDuration(duration);
+        getAnimator().start();
 
         return true;
     }
 
     @Override
-    public void begin() {
+    protected void onAnimatorBegin() {
         add(panel);
         doLayout();
         revalidate();
@@ -107,7 +103,7 @@ public class MessageComponent extends TimingTargetComponent implements JGlassPan
     }
 
     @Override
-    public void end() {
+    protected void onAnimatorEnd() {
         remove(panel);
         doLayout();
         revalidate();
