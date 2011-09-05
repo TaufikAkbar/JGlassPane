@@ -24,7 +24,7 @@ class MessageLabel extends JLabel {
 
     private float alpha = 1.0f;
 
-    public MessageLabel() {
+    MessageLabel() {
         setFont(getFont().deriveFont(30f).deriveFont(Font.BOLD));
     }
 
