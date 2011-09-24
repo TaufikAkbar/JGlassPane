@@ -8,7 +8,9 @@
 package com.stripbandunk.jglasspane;
 
 import com.stripbandunk.jglasspane.component.JGlassPaneComponent;
+import com.stripbandunk.jglasspane.helper.GraphicHelper;
 import java.awt.Component;
+import java.awt.Rectangle;
 import javax.swing.JLayeredPane;
 
 /**
@@ -34,5 +36,9 @@ public class JGlassPane extends JLayeredPane {
     protected void addImpl(Component comp, Object constraints, int index) {
         super.addImpl(comp, constraints, index);
         comp.setBounds(0, 0, getWidth(), getHeight());
+    }
+
+    public Rectangle getClip(Component component) {
+        return GraphicHelper.getClip(component, this);
     }
 }
