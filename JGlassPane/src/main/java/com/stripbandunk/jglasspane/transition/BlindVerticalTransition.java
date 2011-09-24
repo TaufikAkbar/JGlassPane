@@ -14,7 +14,7 @@ import java.awt.Rectangle;
  *
  * @author Eko Kurniatan Khannedy
  */
-public class BlindVerticalTransition extends AbstractTransition {
+public class BlindVerticalTransition extends AbstractGeneralTransition {
 
     private int totalBlind;
 
@@ -32,16 +32,13 @@ public class BlindVerticalTransition extends AbstractTransition {
         return totalBlind;
     }
 
-    public void paint(Graphics2D g2, int effect) {
+    @Override
+    protected void doPaint(Graphics2D g2, int effect) {
         // mendaptkan nilai temp
         double temp = (getClip().width * 1.0) / (totalBlind * 1.0);
 
         // mendapatkan nilai pertahap
         double step = temp / 100.0;
-
-        // mengubah nilai Graphics
-        g2.setClip(getClip());
-        g2.setPaint(getPaint());
 
         // mendapatkan nilai x, y, width, height lalu menggambarnya
         double y = getClip().y;

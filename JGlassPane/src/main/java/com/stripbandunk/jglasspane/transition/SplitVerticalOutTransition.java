@@ -15,7 +15,7 @@ import java.awt.geom.Area;
  *
  * @author Eko Kurniawan Khannedy
  */
-public class SplitVerticalOutTransition extends AbstractTransition {
+public class SplitVerticalOutTransition extends AbstractGeneralTransition {
 
     private Rectangle.Double rectangle;
 
@@ -23,7 +23,8 @@ public class SplitVerticalOutTransition extends AbstractTransition {
         rectangle = new Rectangle.Double();
     }
 
-    public void paint(Graphics2D g2, int effect) {
+    @Override
+    protected void doPaint(Graphics2D g2, int effect) {
         // Mendapatkan nilai pertahap
         double step = getClip().width / 100.0;
 
@@ -46,7 +47,6 @@ public class SplitVerticalOutTransition extends AbstractTransition {
 
         // Melakukan penggambaran
         g2.setClip(area);
-        g2.setPaint(getPaint());
         g2.fill(getClip());
     }
 }

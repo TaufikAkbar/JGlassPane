@@ -15,7 +15,7 @@ import java.awt.Rectangle;
  *
  * @author Eko Kurniawan Khannedy
  */
-public class BoxInTransition extends AbstractTransition {
+public class BoxInTransition extends AbstractGeneralTransition {
 
     private Rectangle.Double rectangle;
 
@@ -26,7 +26,8 @@ public class BoxInTransition extends AbstractTransition {
         center = new Point();
     }
 
-    public void paint(Graphics2D g2, int effect) {
+    @Override
+    protected void doPaint(Graphics2D g2, int effect) {
         // Mengubah point tengah
         center.setLocation(getClip().width / 2, getClip().height / 2);
 
@@ -44,8 +45,6 @@ public class BoxInTransition extends AbstractTransition {
         rectangle.setRect(x, y, width, height);
 
         // melakukan penggambaran
-        g2.setClip(getClip());
-        g2.setPaint(getPaint());
         g2.fill(rectangle);
     }
 }

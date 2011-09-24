@@ -25,6 +25,7 @@ public class FileImageCreator implements ImageCreator {
         this.file = file;
     }
 
+    @Override
     public BufferedImage create() {
         try {
             return ImageIO.read(file);

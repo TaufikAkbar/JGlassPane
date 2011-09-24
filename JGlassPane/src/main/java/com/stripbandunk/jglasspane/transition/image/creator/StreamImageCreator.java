@@ -25,6 +25,7 @@ public class StreamImageCreator implements ImageCreator {
         this.inputStream = inputStream;
     }
 
+    @Override
     public BufferedImage create() {
         try {
             return ImageIO.read(inputStream);

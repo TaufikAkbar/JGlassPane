@@ -128,7 +128,7 @@ public class TransitionComponent extends TimingTargetComponent implements JGlass
 
     @Override
     protected void onAnimatorBegin() {
-        transition.beforeStart();
+        transition.beforeStart(this);
         fireTransitionListenerOnStart(new TransitionEvent(this));
     }
 

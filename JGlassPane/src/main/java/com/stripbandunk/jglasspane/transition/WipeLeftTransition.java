@@ -14,7 +14,7 @@ import java.awt.Rectangle;
  *
  * @author Eko Kurniawan Khannedy
  */
-public class WipeLeftTransition extends AbstractTransition {
+public class WipeLeftTransition extends AbstractGeneralTransition {
 
     private Rectangle.Double rectangle;
 
@@ -22,7 +22,8 @@ public class WipeLeftTransition extends AbstractTransition {
         rectangle = new Rectangle.Double();
     }
 
-    public void paint(Graphics2D g2, int effect) {
+    @Override
+    protected void doPaint(Graphics2D g2, int effect) {
         // Mendapatkan nilai pertahap
         double step = getClip().width / 100.0;
 
@@ -36,8 +37,6 @@ public class WipeLeftTransition extends AbstractTransition {
         rectangle.setRect(x, y, width, height);
 
         // melakukan pengambaran
-        g2.setClip(getClip());
-        g2.setPaint(getPaint());
         g2.fill(rectangle);
     }
 }

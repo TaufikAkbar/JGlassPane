@@ -16,7 +16,7 @@ import java.awt.geom.Area;
  *
  * @author Eko Kurniawan Khannedy
  */
-public class BoxOutTransition extends AbstractTransition {
+public class BoxOutTransition extends AbstractGeneralTransition {
 
     private Point center;
 
@@ -27,7 +27,8 @@ public class BoxOutTransition extends AbstractTransition {
         center = new Point();
     }
 
-    public void paint(Graphics2D g2, int effect) {
+    @Override
+    protected void doPaint(Graphics2D g2, int effect) {
         // Mengubah point tengah
         center.setLocation(getClip().width / 2, getClip().height / 2);
 
@@ -51,7 +52,6 @@ public class BoxOutTransition extends AbstractTransition {
 
         // melakukan penggambaran
         g2.setClip(area);
-        g2.setPaint(getPaint());
         g2.fill(getClip());
     }
 }

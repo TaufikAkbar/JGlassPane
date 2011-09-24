@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
  *
  * @author Eko Kurniawan Khannedy
  */
-public class FadeTransition extends AbstractTransition {
+public class FadeTransition extends AbstractGeneralTransition {
 
     private AlphaComposite alphaComposite;
 
@@ -22,12 +22,8 @@ public class FadeTransition extends AbstractTransition {
         alphaComposite = AlphaComposite.SrcOver;
     }
 
-    public void paint(Graphics2D g2, int effect) {
-        // Mengubah Clip
-        g2.setClip(getClip());
-        // Mengubah warna Graphics
-        g2.setPaint(getPaint());
-
+    @Override
+    protected void doPaint(Graphics2D g2, int effect) {
         // Mengubah alpha composite
         alphaComposite = alphaComposite.derive(1F - (effect / 100F));
 

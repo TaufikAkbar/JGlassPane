@@ -25,6 +25,7 @@ public class UrlImageCreator implements ImageCreator {
         this.url = url;
     }
 
+    @Override
     public BufferedImage create() {
         try {
             return ImageIO.read(url);

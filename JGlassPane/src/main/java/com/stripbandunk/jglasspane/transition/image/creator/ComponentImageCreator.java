@@ -23,6 +23,7 @@ public class ComponentImageCreator implements ImageCreator {
         this.component = component;
     }
 
+    @Override
     public BufferedImage create() {
         return GraphicHelper.getBufferedImage(component);
     }

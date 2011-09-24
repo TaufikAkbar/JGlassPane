@@ -7,9 +7,8 @@
  */
 package com.stripbandunk.jglasspane.transition;
 
+import com.stripbandunk.jglasspane.component.TransitionComponent;
 import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Rectangle;
 
 /**
  *
@@ -17,13 +16,9 @@ import java.awt.Rectangle;
  */
 public interface Transition {
 
-    public void beforeStart();
+    public void beforeStart(TransitionComponent component);
 
     public void afterFinish();
 
     public void paint(Graphics2D g2, int effect);
-
-    public Paint getPaint();
-
-    public Rectangle getClip();
 }

@@ -14,7 +14,7 @@ import java.awt.Rectangle;
  *
  * @author Eko Kurniawan Khannedy
  */
-public class SplitVerticalInTransition extends AbstractTransition {
+public class SplitVerticalInTransition extends AbstractGeneralTransition {
 
     private Rectangle.Double rectangle;
 
@@ -22,7 +22,8 @@ public class SplitVerticalInTransition extends AbstractTransition {
         rectangle = new Rectangle.Double();
     }
 
-    public void paint(Graphics2D g2, int effect) {
+    @Override
+    protected void doPaint(Graphics2D g2, int effect) {
         // Mendapatkan nilai pertahap
         double step = getClip().width / 100.0;
 
@@ -39,8 +40,6 @@ public class SplitVerticalInTransition extends AbstractTransition {
         rectangle.setRect(x, y, width, height);
 
         // melakukan penggambaran
-        g2.setClip(getClip());
-        g2.setPaint(getPaint());
         g2.fill(rectangle);
     }
 }
