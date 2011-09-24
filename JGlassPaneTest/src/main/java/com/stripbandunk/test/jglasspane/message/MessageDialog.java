@@ -17,7 +17,6 @@ import com.stripbandunk.jglasspane.JGlassPane;
 import com.stripbandunk.jglasspane.component.MessageComponent;
 import com.stripbandunk.jglasspane.event.MessageEvent;
 import com.stripbandunk.jglasspane.event.MessageListener;
-import java.awt.Color;
 
 /**
  *
@@ -134,17 +133,17 @@ public class MessageDialog extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        component.showError("Error Message");
+        component.showError("Ups, the connection is error");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        component.show("Default Message");
+        component.show("Welcome to StripBandunk");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        component.showWarning("Warning Message");
+        component.showWarning("Please insert your first name");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
