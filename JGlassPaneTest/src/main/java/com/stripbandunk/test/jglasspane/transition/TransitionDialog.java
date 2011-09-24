@@ -15,7 +15,8 @@ package com.stripbandunk.test.jglasspane.transition;
 
 import com.stripbandunk.jglasspane.JGlassPane;
 import com.stripbandunk.jglasspane.component.TransitionComponent;
-import com.stripbandunk.jglasspane.helper.GraphicHelper;
+import com.stripbandunk.jglasspane.event.TransitionEvent;
+import com.stripbandunk.jglasspane.event.TransitionListener;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Paint;
@@ -27,11 +28,11 @@ import javax.swing.JColorChooser;
  * @author echo
  */
 public abstract class TransitionDialog extends javax.swing.JDialog {
-
+    
     private static final long serialVersionUID = 1L;
-
+    
     private JGlassPane glassPane;
-
+    
     private TransitionComponent transitionComponent;
 
     /** Creates new form TransitionDialog
@@ -41,16 +42,28 @@ public abstract class TransitionDialog extends javax.swing.JDialog {
     public TransitionDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        
         glassPane = new JGlassPane();
         setGlassPane(glassPane);
 
         // Tampilkan GlassPane
         getGlassPane().setVisible(true);
-
+        
         transitionComponent = new TransitionComponent();
+        transitionComponent.addTransitionListener(new TransitionListener() {
+            
+            @Override
+            public void onStart(TransitionEvent event) {
+                System.out.println("Animation Start");
+            }
+            
+            @Override
+            public void onFinish(TransitionEvent event) {
+                System.out.println("Animation Finish");
+            }
+        });
         glassPane.addGlassPaneComponent(transitionComponent);
-
+        
         setLocationRelativeTo(parent);
     }
 
@@ -149,20 +162,20 @@ public abstract class TransitionDialog extends javax.swing.JDialog {
 
 private void buttonInpuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInpuActionPerformed
     // TODO add your handling code here:
-    Rectangle rectangle = GraphicHelper.getClip(panelContainer, transitionComponent);
+    Rectangle rectangle = glassPane.getClip(panelContainer);
     Paint paint = panelColor.getBackground();
     startTransition(rectangle, paint);
     showInputForm();
 }//GEN-LAST:event_buttonInpuActionPerformed
-
+    
 private void buttonTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTableActionPerformed
     // TODO add your handling code here:
-    Rectangle rectangle = GraphicHelper.getClip(panelContainer, transitionComponent);
+    Rectangle rectangle = glassPane.getClip(panelContainer);
     Paint paint = panelColor.getBackground();
     startTransition(rectangle, paint);
     showTableForm();
 }//GEN-LAST:event_buttonTableActionPerformed
-
+    
 private void buttonColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonColorActionPerformed
     // TODO add your handling code here:
     Color color = JColorChooser.showDialog(this, "Choose Color", panelColor.getBackground());
@@ -186,15 +199,15 @@ private void buttonColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         CardLayout layout = (CardLayout) panelContainer.getLayout();
         layout.show(panelContainer, "identity");
     }
-
+    
     public void showTableForm() {
         CardLayout layout = (CardLayout) panelContainer.getLayout();
         layout.show(panelContainer, "table");
     }
-
+    
     public TransitionComponent getTransitionComponent() {
         return transitionComponent;
     }
-
+    
     public abstract void startTransition(Rectangle rectangle, Paint paint);
 }
