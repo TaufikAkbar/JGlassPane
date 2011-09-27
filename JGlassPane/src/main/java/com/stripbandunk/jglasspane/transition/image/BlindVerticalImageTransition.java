@@ -17,7 +17,9 @@ import java.awt.image.BufferedImage;
  */
 public class BlindVerticalImageTransition extends AbstractRectangleImageTransition {
 
-    private int totalBlind;
+    public static final int DEFAULT_TOTAL_BLIND = 5;
+
+    private int totalBlind = DEFAULT_TOTAL_BLIND;
 
     public void setTotalBlind(int totalBlind) {
         this.totalBlind = totalBlind;
