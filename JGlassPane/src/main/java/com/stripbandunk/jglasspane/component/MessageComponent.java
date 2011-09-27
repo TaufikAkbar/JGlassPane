@@ -12,6 +12,7 @@ import com.stripbandunk.jglasspane.event.MessageListener;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 /**
@@ -46,6 +47,14 @@ public class MessageComponent extends TimingTargetComponent implements JGlassPan
         getAnimator().addTarget(new PropertySetter(this, "alpha", 100, 0));
 
         setLayout(new FlowLayout(FlowLayout.CENTER));
+    }
+
+    public void setMessageFont(Font font) {
+        label.setFont(font);
+    }
+
+    public Font getMessageFont() {
+        return label.getFont();
     }
 
     public int getAlpha() {
