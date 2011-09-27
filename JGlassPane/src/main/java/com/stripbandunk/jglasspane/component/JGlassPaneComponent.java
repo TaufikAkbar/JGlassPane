@@ -7,11 +7,18 @@
  */
 package com.stripbandunk.jglasspane.component;
 
+import java.awt.Component;
+
 /**
  *
  * @author Eko Kurniawan Khannedy
  */
-@SuppressWarnings("MarkerInterface")
 public interface JGlassPaneComponent {
-    
+
+    /**
+     * Get component that will be added to JGlassPane
+     * 
+     * @return Component for JGlassPane
+     */
+    Component getComponent();
 }

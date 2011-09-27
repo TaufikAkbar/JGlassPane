@@ -10,6 +10,7 @@ package com.stripbandunk.jglasspane.component;
 import com.stripbandunk.jglasspane.event.TransitionEvent;
 import com.stripbandunk.jglasspane.event.TransitionListener;
 import com.stripbandunk.jglasspane.transition.Transition;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
@@ -136,5 +137,10 @@ public class TransitionComponent extends TimingTargetComponent implements JGlass
     protected void onAnimatorEnd() {
         transition.afterFinish();
         fireTransitionListenerOnFinish(new TransitionEvent(this));
+    }
+
+    @Override
+    public Component getComponent() {
+        return this;
     }
 }

@@ -26,10 +26,8 @@ public class JGlassPane extends JLayeredPane {
     }
 
     public void addGlassPaneComponent(JGlassPaneComponent comp) {
-        if (comp instanceof Component) {
-            Component component = (Component) comp;
-            add(component);
-        }
+        Component component = comp.getComponent();
+        add(component);
     }
 
     @Override

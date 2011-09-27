@@ -11,6 +11,7 @@ import com.stripbandunk.jglasspane.event.TransitionEvent;
 import com.stripbandunk.jglasspane.event.TransitionListener;
 import com.stripbandunk.jglasspane.transition.image.ImageTransition;
 import com.stripbandunk.jglasspane.transition.image.creator.ImageCreator;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -153,5 +154,10 @@ public class ImageTransitionComponent extends TimingTargetComponent implements J
         fireTransitionListenerOnFinish(new TransitionEvent(this));
         // clear image
         image = null;
+    }
+
+    @Override
+    public Component getComponent() {
+        return this;
     }
 }

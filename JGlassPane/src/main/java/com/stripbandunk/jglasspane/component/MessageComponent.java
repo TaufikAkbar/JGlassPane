@@ -10,6 +10,7 @@ package com.stripbandunk.jglasspane.component;
 import com.stripbandunk.jglasspane.event.MessageEvent;
 import com.stripbandunk.jglasspane.event.MessageListener;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
@@ -145,5 +146,10 @@ public class MessageComponent extends TimingTargetComponent implements JGlassPan
         for (MessageListener listener : listenerList.getListeners(MessageListener.class)) {
             listener.onHide(event);
         }
+    }
+
+    @Override
+    public Component getComponent() {
+        return this;
     }
 }
