@@ -25,6 +25,11 @@ public class JGlassPane extends JLayeredPane {
         addComponentListener(new ResizeListener());
     }
 
+    public void removeGlassPaneComponent(JGlassPaneComponent comp) {
+        Component component = comp.getComponent();
+        remove(component);
+    }
+
     public void addGlassPaneComponent(JGlassPaneComponent comp) {
         Component component = comp.getComponent();
         add(component);
