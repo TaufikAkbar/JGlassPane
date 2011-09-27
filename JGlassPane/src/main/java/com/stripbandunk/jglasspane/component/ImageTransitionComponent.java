@@ -67,6 +67,8 @@ public class ImageTransitionComponent extends TimingTargetComponent implements J
             return false;
         }
 
+        image = imageCreator.create();
+
         getAnimator().setDuration(duration);
         getAnimator().setAcceleration(acceleration);
         getAnimator().setDeceleration(deceleration);
@@ -143,7 +145,6 @@ public class ImageTransitionComponent extends TimingTargetComponent implements J
 
     @Override
     protected void onAnimatorBegin() {
-        image = imageCreator.create();
         transition.beforeStart();
         fireTransitionListenerOnStart(new TransitionEvent(this));
     }
