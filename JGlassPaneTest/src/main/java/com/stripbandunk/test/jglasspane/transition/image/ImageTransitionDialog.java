@@ -15,6 +15,8 @@ package com.stripbandunk.test.jglasspane.transition.image;
 
 import com.stripbandunk.jglasspane.JGlassPane;
 import com.stripbandunk.jglasspane.component.ImageTransitionComponent;
+import com.stripbandunk.jglasspane.event.TransitionEvent;
+import com.stripbandunk.jglasspane.event.TransitionListener;
 import com.stripbandunk.jglasspane.helper.GraphicHelper;
 import com.stripbandunk.jglasspane.transition.image.creator.ComponentImageCreator;
 import com.stripbandunk.jglasspane.transition.image.creator.ImageCreator;
@@ -56,6 +58,19 @@ public abstract class ImageTransitionDialog extends javax.swing.JDialog {
         imageTransitionComponent.setImageCreator(imageCreator);
 
         setLocationRelativeTo(parent);
+        
+        imageTransitionComponent.addTransitionListener(new TransitionListener() {
+
+            @Override
+            public void onStart(TransitionEvent event) {
+                System.out.println("transition start");
+            }
+
+            @Override
+            public void onFinish(TransitionEvent event) {
+                System.out.println("transition stop");
+            }
+        });
     }
 
     /** This method is called from within the constructor to

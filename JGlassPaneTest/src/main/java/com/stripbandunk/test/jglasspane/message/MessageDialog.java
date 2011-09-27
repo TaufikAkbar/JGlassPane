@@ -57,6 +57,8 @@ public class MessageDialog extends javax.swing.JDialog {
                 System.out.println("OK");
             }
         });
+        
+        setLocationRelativeTo(parent);
     }
 
     /** This method is called from within the constructor to
