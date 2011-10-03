@@ -7,7 +7,7 @@
  */
 package com.stripbandunk.test.jglasspane.transition.image;
 
-import com.stripbandunk.jglasspane.transition.image.CoverLeftImageTransition;
+import com.stripbandunk.jglasspane.transition.image.CoverRightImageTransition;
 import java.awt.Frame;
 import java.awt.Point;
 
@@ -19,12 +19,12 @@ public class CoverRightImageTransitionDialog extends ImageTransitionDialog {
 
     private static final long serialVersionUID = 1L;
 
-    private CoverLeftImageTransition transition;
+    private CoverRightImageTransition transition;
 
     public CoverRightImageTransitionDialog(Frame parent, boolean modal) {
         super(parent, modal);
 
-        transition = new CoverLeftImageTransition();
+        transition = new CoverRightImageTransition();
         getImageTransitionComponent().setTransition(transition);
     }
 
