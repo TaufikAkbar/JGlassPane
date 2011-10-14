@@ -25,7 +25,8 @@ public abstract class TimingTargetComponent extends JPanel implements TimingTarg
         animator.addTarget(this);
     }
 
-    protected Animator getAnimator() {
+    @SuppressWarnings("FinalMethod")
+    protected final Animator getAnimator() {
         return animator;
     }
 
@@ -39,12 +40,14 @@ public abstract class TimingTargetComponent extends JPanel implements TimingTarg
     }
 
     @Override
-    public void begin() {
+    @SuppressWarnings("FinalMethod")
+    public final void begin() {
         onAnimatorBegin();
     }
 
     @Override
-    public void end() {
+    @SuppressWarnings("FinalMethod")
+    public final void end() {
         onAnimatorEnd();
     }
 
