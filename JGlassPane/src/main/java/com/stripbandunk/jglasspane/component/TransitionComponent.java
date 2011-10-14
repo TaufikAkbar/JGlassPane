@@ -76,7 +76,7 @@ public class TransitionComponent extends TimingTargetComponent implements JGlass
     }
 
     public boolean start(int duration, float acceleration, float deceleration) {
-        if (transition == null || getAnimator().isRunning()) {
+        if (getAnimator().isRunning()) {
             return false;
         }
 
@@ -91,7 +91,7 @@ public class TransitionComponent extends TimingTargetComponent implements JGlass
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (transition != null && getAnimator().isRunning()) {
+        if (getAnimator().isRunning()) {
             paintTransition(g);
         }
     }
