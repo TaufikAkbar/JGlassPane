@@ -9,6 +9,7 @@ package com.stripbandunk.jglasspane.component;
 
 import com.stripbandunk.jglasspane.event.TransitionEvent;
 import com.stripbandunk.jglasspane.event.TransitionListener;
+import com.stripbandunk.jglasspane.helper.AssertHelper;
 import com.stripbandunk.jglasspane.transition.Transition;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -45,6 +46,9 @@ public class TransitionComponent extends TimingTargetComponent implements JGlass
     }
 
     public void setTransition(Transition transition) {
+
+        AssertHelper.notNull(transition, "Transition is null");
+
         Transition oldValue = getTransition();
         this.transition = transition;
         if (oldValue != transition) {
