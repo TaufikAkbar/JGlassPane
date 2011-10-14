@@ -10,6 +10,7 @@ package com.stripbandunk.jglasspane.component;
 import com.stripbandunk.jglasspane.event.TransitionEvent;
 import com.stripbandunk.jglasspane.event.TransitionListener;
 import com.stripbandunk.jglasspane.transition.image.ImageTransition;
+import com.stripbandunk.jglasspane.transition.image.NoImageTransition;
 import com.stripbandunk.jglasspane.transition.image.creator.ImageCreator;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -44,6 +45,9 @@ public class ImageTransitionComponent extends TimingTargetComponent implements J
     private BufferedImage image;
 
     public ImageTransitionComponent() {
+
+        transition = new NoImageTransition();
+
         setOpaque(false);
         getAnimator().addTarget(new PropertySetter(this, "effect", 0, 100));
     }
@@ -63,7 +67,7 @@ public class ImageTransitionComponent extends TimingTargetComponent implements J
     }
 
     public boolean start(int duration, float acceleration, float deceleration) {
-        if (imageCreator == null || transition == null || getAnimator().isRunning()) {
+        if (imageCreator == null || getAnimator().isRunning()) {
             return false;
         }
 
@@ -80,7 +84,7 @@ public class ImageTransitionComponent extends TimingTargetComponent implements J
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (imageCreator != null && transition != null && getAnimator().isRunning()) {
+        if (imageCreator != null && getAnimator().isRunning()) {
             paintTransition(g);
         }
     }
