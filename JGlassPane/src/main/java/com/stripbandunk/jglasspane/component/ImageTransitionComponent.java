@@ -9,6 +9,7 @@ package com.stripbandunk.jglasspane.component;
 
 import com.stripbandunk.jglasspane.event.TransitionEvent;
 import com.stripbandunk.jglasspane.event.TransitionListener;
+import com.stripbandunk.jglasspane.helper.AssertHelper;
 import com.stripbandunk.jglasspane.transition.image.ImageTransition;
 import com.stripbandunk.jglasspane.transition.image.NoImageTransition;
 import com.stripbandunk.jglasspane.transition.image.creator.ImageCreator;
@@ -132,6 +133,9 @@ public class ImageTransitionComponent extends TimingTargetComponent implements J
     }
 
     public void setTransition(ImageTransition transition) {
+        
+        AssertHelper.notNull(transition, "ImageTransition is null");
+        
         ImageTransition oldTransition = this.transition;
         this.transition = transition;
         firePropertyChange(PROPERTY_TRANSITION, oldTransition, transition);
