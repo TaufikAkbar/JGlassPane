@@ -10,6 +10,7 @@ package com.stripbandunk.jglasspane.component;
 import com.stripbandunk.jglasspane.event.TransitionEvent;
 import com.stripbandunk.jglasspane.event.TransitionListener;
 import com.stripbandunk.jglasspane.helper.AssertHelper;
+import com.stripbandunk.jglasspane.transition.NoTransition;
 import com.stripbandunk.jglasspane.transition.Transition;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -37,6 +38,8 @@ public class TransitionComponent extends TimingTargetComponent implements JGlass
     private Transition transition;
 
     public TransitionComponent() {
+        transition = new NoTransition();
+
         setOpaque(false);
         getAnimator().addTarget(new PropertySetter(this, "effect", 0, 100));
     }
