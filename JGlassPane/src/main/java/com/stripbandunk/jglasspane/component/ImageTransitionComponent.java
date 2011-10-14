@@ -133,9 +133,9 @@ public class ImageTransitionComponent extends TimingTargetComponent implements J
     }
 
     public void setTransition(ImageTransition transition) {
-        
+
         AssertHelper.notNull(transition, "ImageTransition is null");
-        
+
         ImageTransition oldTransition = this.transition;
         this.transition = transition;
         firePropertyChange(PROPERTY_TRANSITION, oldTransition, transition);
@@ -146,6 +146,9 @@ public class ImageTransitionComponent extends TimingTargetComponent implements J
     }
 
     public void setImageCreator(ImageCreator imageCreator) {
+
+        AssertHelper.notNull(imageCreator, "ImageCreator is null");
+
         ImageCreator oldImageCreator = this.imageCreator;
         this.imageCreator = imageCreator;
         firePropertyChange(PROPERTY_IMAGECREATOR, oldImageCreator, imageCreator);
