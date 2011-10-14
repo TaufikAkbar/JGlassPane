@@ -129,6 +129,12 @@ public class TransitionComponent extends TimingTargetComponent implements JGlass
         return effect;
     }
 
+    /**
+     * Don't use this method, this method used by Animator
+     * @param effect
+     * @deprecated 
+     */
+    @Deprecated
     public void setEffect(int effect) {
         this.effect = effect;
         repaint();
