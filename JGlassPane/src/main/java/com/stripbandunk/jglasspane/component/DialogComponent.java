@@ -7,9 +7,10 @@
  */
 package com.stripbandunk.jglasspane.component;
 
+import com.stripbandunk.jglasspane.event.DialogListener;
 import com.stripbandunk.jglasspane.helper.AssertHelper;
 import java.awt.Component;
-import javax.swing.BoxLayout;
+import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 /**
@@ -26,7 +27,15 @@ public class DialogComponent extends JPanel implements JGlassPaneComponent {
         blockListener = new DialogBlockListener();
 
         setOpaque(false);
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setLayout(new FlowLayout(FlowLayout.CENTER, 30, 30));
+    }
+
+    public void addDialogListener(DialogListener listener) {
+        listenerList.add(DialogListener.class, listener);
+    }
+
+    public void removeDialogListener(DialogListener listener) {
+        listenerList.remove(DialogListener.class, listener);
     }
 
     @Override
@@ -38,9 +47,6 @@ public class DialogComponent extends JPanel implements JGlassPaneComponent {
 
         AssertHelper.notNull(component, "Component is null");
 
-        // add component
-        add(component);
-
         if (block) {
             // add block listener
             addMouseListener(blockListener);
@@ -48,6 +54,16 @@ public class DialogComponent extends JPanel implements JGlassPaneComponent {
             addMouseWheelListener(blockListener);
             addKeyListener(blockListener);
         }
+
+        // add component
+        add(component);
+
+        // validate and repaint component and subcomponent
+        validate();
+        repaint();
+
+        // request focus
+        component.requestFocus();
     }
 
     public void hideDialog() {
@@ -59,5 +75,9 @@ public class DialogComponent extends JPanel implements JGlassPaneComponent {
 
         // remove all component
         removeAll();
+
+        // validate and repaint component and subcomponent
+        validate();
+        repaint();
     }
 }
